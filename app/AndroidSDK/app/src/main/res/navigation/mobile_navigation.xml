@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.addonpayments.androidsdk.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_api"
+            app:destination="@id/nav_api" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_api"
+        android:name="com.addonpayments.androidsdk.ui.api.ApiFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_api" >
+        <action
+            android:id="@+id/action_nav_api_to_nav_hpp"
+            app:destination="@id/nav_hpp" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_hpp"
+        android:name="com.addonpayments.androidsdk.ui.hpp.HppFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_hpp" >
+        <action
+            android:id="@+id/action_nav_hpp_to_nav_redes"
+            app:destination="@id/nav_redes" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_redes"
+        android:name="com.addonpayments.androidsdk.ui.redes.RedesFragment"
+        android:label="@string/menu_send"
+        tools:layout="@layout/fragment_redes" />
+</navigation>

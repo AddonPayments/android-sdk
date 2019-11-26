@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AndroidSDK</string>
+    <string name="action_settings">Ajustos</string>
+    <string name="gateway">Passarel·la:</string>
+    <string name="menu_send">" Xarxes Socials"</string>
+    <string name="menu_home">Inici</string>
+    <string name="precio">Preu:</string>
+    <string name="desc">Descripció:</string>
+    <string name="dir">Direcció:</string>
+    <string name="ref">Referència:</string>
+    <string name="payNow">Pagar ara</string>
+    <string name="numCard">" Número de targeta"</string>
+    <string name="mes">Mes</string>
+    <string name="year">Any</string>
+    <string name="cvv">CVV</string>
+    <string name="nTitular">" Nom de l'titular"</string>
+    <string name="envOpButton">ENVIAR OPERACIÓ</string>
+    <string name="cpEnv">C.P. Envío:</string>
+    <string name="titleHpp">Viatge a Nova Zelanda</string>
+    <string name="titleFragmentApi">Enviar operació per remoto</string>
+    <string name="titleFragmentHpp">Enviar opració per redirecció</string>
+    <string name="ruta">Ruta per Nova Zelanda</string>
+    <string name="unidad">1 unitat</string>
+</resources>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_api"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <EditText
+            android:id="@+id/numbertext"
+            android:layout_width="283dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="28dp"
+            android:ems="10"
+            android:hint="@string/numCard"
+            android:inputType="textPersonName"
+            android:text="4263970000005262"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <EditText
+            android:id="@+id/mestext"
+            android:layout_width="121dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="60dp"
+            android:ems="10"
+            android:hint="@string/mes"
+            android:inputType="textPersonName"
+            android:text="12"
+            app:layout_constraintEnd_toStartOf="@+id/anytext"
+            app:layout_constraintHorizontal_bias="0.609"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/numbertext" />
+
+        <EditText
+            android:id="@+id/anytext"
+            android:layout_width="121dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginRight="64dp"
+            android:ems="10"
+            android:hint="@string/year"
+            android:inputType="textPersonName"
+            android:text="2020"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/numbertext" />
+
+        <EditText
+            android:id="@+id/cvvtext"
+            android:layout_width="283dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="60dp"
+            android:ems="10"
+            android:hint="@string/cvv"
+            android:inputType="textPersonName"
+            android:text="123"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/anytext" />
+
+        <EditText
+            android:id="@+id/nombretext"
+            android:layout_width="283dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:hint="@string/nTitular"
+            android:inputType="textPersonName"
+            android:text="Petición SDK_Android"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cvvtext" />
+
+        <Button
+            android:id="@+id/sendOP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:onClick="onClick"
+            android:text="@string/envOpButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nombretext" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/titleFragmentApi"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_api" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

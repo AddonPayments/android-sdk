@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Víctor Cantera">
+        <link rel="icon" href="../../assets/img/comercia_ico.png" type="image/x-icon"/ >
+        <title>Operativa HPP - SDK Android</title>
+
+        <!-- Bootstrap 4.3.1 -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="../../assets/css/style.css">
+    </head>
+
+    <body>
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-lg navbar-light navbar-rpdc mb-3">
+            <a class="navbar-brand">
+                <img src="../../assets/img/log2.svg" width="30" height="30" class="img-fluid" alt="Logo Addon Payments">
+                <span class="addonNav">ADDON</span> <span>PAYMENTS</span>
+                <span class="d-none d-sm-none d-lg-inline d-xl-inline sdkNav">
+                    <span>
+                        /SDK
+                        <span class="barraNav">_</span>
+                        de
+                        <span class="barraNav">_</span>
+                        Android
+                    </span>
+                </span>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+          </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto pl-2 pr-2">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Inicio
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item pl-2" href="../../index.html">Índice</a>
+                            <a class="dropdown-item pl-2" href="../errores.html">Errores de Addon Payments</a>
+                            <a class="dropdown-item pl-2" href="../informe.html">Convertir informe</a>
+                        </div>
+                    </li>
+                    <li class="nav-item ml-1 dropdown">
+                        <a class="nav-link pl-2 dropdown-toggle active" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Pagos con tarjeta
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-header text-center p-0">API</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2" href="../API/index.html">Operación API</a>
+                            <hr class="m-0 p-0">
+                            <div class="dropdown-header text-center p-0">HPP</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2 active" href="#">Operación HPP</a>
+                        </div>
+                    </li>
+                    <li class="nav-item ml-1 dropdown">
+                        <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Validadores
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item pl-2" href="../validadores/validadores.html">Validadores</a>
+                            <a class="dropdown-item pl-2" href="../validadores/validadores.html#cardholder">Nombre del titular</a>
+                            <a class="dropdown-item pl-2" href="../validadores/validadores.html#numberCard">Número de tarjeta</a>
+                            <a class="dropdown-item pl-2" href="../validadores/validadores.html#cvn">CVN</a>
+                            <a class="dropdown-item pl-2" href="../validadores/validadores.html#mes">Mes</a>
+                            <a class="dropdown-item pl-2" href="../validadores/validadores.html#año">Año</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /NAVBAR -->
+
+        <div class="col-lg-12"> 
+            <div id="contenidoComun" class="container-fluid">
+                <div class="row">
+
+                    <!-- Menú lateral -->
+                    <div class="col-lg-2 sticky-top d-none d-sm-none d-lg-block d-xl-block MenuLateral">
+
+                        <!-- Barra de progreso -->
+                        <div class="progress-bar" id="progreso"></div>
+                        <!-- /Barra de progreso -->
+
+                        <nav class="navbar sticky-top navbar-light" style="padding: 0px;">
+                            <nav class="nav nav-pills flex-column">
+                                <a class="nav-link" href="#hpp">1. Operativa HPP</a>
+                                <nav>
+                                  <a class="nav-link ml-3 my-1" href="#codigoEjemplo">1.1 Código de ejemplo</a>
+                                </nav>
+                                <a class="nav-link" href="#descripciones">2. Descripciones</a>
+                                <nav class="nav nav-pills flex-column">
+                                  <a class="nav-link ml-3 my-1" href="#imports">2.1 Imports</a>
+                                  <a class="nav-link ml-3 my-1" href="#mainActivity">2.2 MainActivity.java</a>
+                                  <a class="nav-link ml-3 my-1" href="#hash">2.3 Hash.java</a>
+                                  <a class="nav-link ml-3 my-1" href="#orderid">2.4 orderID.java</a>
+                                  <a class="nav-link ml-3 my-1" href="#buildgradle">2.5 build.gradle</a>
+                                </nav>
+                            </nav>
+                        </nav>
+                    </div>
+                    <!-- /Menú lateral -->
+
+                    <!-- Contenido común -->
+                    <div class="col-lg-10" >
+
+                        <!-- Punto 1-->
+                        <div class="contenedor">
+                            <div class="pl-3 pt-3 pr-3 pb-4 mb-3 text-justify">
+                                <h3 id="hpp" class="titulo">
+                                    1. Operación a través de HPP
+                                </h3>
+                                <hr>
+
+                                <p>
+                                    Hosted Payment Page (HPP) es nuestro PCI DSS v3.2 que cumple con la solución Redirect. Permite a los comercios aceptar fácilmente los datos de las tarjetas en su aplicación, al mismo tiempo que reducen considerablemente los requisitos de cumplimiento de PCI asociados a la recopilación de datos de tarjetas. Los comercios que utilizan la HPP pueden acreditar su cumplimiento de PCI rellenando un breve Cuestionario de autoevaluación de la <a target="_blank" href="https://www.pcisecuritystandards.org/">PCI DSS (SAQ) A</a>.
+                                    <small class="form-text text-muted alert alert-primary">
+                                        --&gt; Los clientes deben tener activado Javascript en sus navegadores para que la HPP funcione correctamente.
+                                        Las solicitudes se deben enviar a Addon Payments una vez finalizada la compra, cuando se conozca el importe total del pago. No se precisa ninguna información sobre los contenidos del pedido para que Addon Payments procese la transacción. Sin embargo, puedes enviar toda la información sobre el pedido que desees a Addon Payments; el sistema de Addon Payments ignorará esta información, pero se enviará de vuelta junto con tu script de respuesta una vez procesada la transacción.
+                                    </small>
+                                </p>
+                                <p>
+                                    <b>La HPP tiene dos URL diferentes</b> para el modo de prueba y el modo activo. La primera vez que crees una cuenta con Addon Payments, la cuenta se establecerá en el modo de prueba. Te recomendamos procesar varias transacciones en el modo de prueba antes de activar la cuenta para asegurarte de que se realizan correctamente.
+                                    <ul>
+                                        <li>
+                                            <b>URL para transacciones activas:</b> https://hpp.addonpayments.com/pay
+                                        </li>
+                                        <li>
+                                            <b>URL para transacciones de prueba:</b>note https://hpp.sandbox.addonpayments.com/pay
+                                        </li>
+                                    </ul>
+                                </p>
+                                <h5 class="pt-3" id="codigoEjemplo">1.1 Código de ejemplo (archivo MainActivity.java, Hash.java y orderID.java)</h5>
+
+                                <hr>
+
+                                <p>
+                                    Archivo "MainActivity.java"
+                                </p>
+
+                                <hr>
+
+                                <div class="p-4 panelCode">
+                                    <code>
+                                            <span class="comments">// Archivo MainActivity.java</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">android.content.Intent</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">android.net.Uri</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">android.view.View</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">android.widget.EditText</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">android.widget.Toast</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">android.os.Build</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">android.util.Log</span>;</span>
+                                        <br>
+                                        <br>
+                                            <span class="orange">import <span class="variables">androidx.annotation.RequiresApi</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">com.addonpayments.androidsdk.ui.hpp.clases.Hash</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">com.android.volley.AuthFailureError</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">com.android.volley.NetworkResponse</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">com.android.volley.Request</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">com.android.volley.Response</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">com.android.volley.VolleyError</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">com.android.volley.toolbox.StringRequest</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">com.android.volley.RequestQueue</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">com.android.volley.toolbox.Volley</span>;</span>
+                                        <br>
+                                        <br>
+                                            <span class="orange">import <span class="variables">org.json.JSONException</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">org.json.JSONObject</span>;</span>
+                                        <br>
+                                        <br>
+                                            <span class="orange">import <span class="variables">java.nio.charset.StandardCharsets</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">java.text.SimpleDateFormat</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">java.util.Date</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">java.util.HashMap</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">java.util.Map</span>;</span>
+                                        <br>
+                                        <br>
+                                            <span class="orange">public class  </span><span class="variables">MainActivity</span> <span class="orange">extends</span> <span class="variables">AppCompatActivity</span> <span class="orange">implements</span> <span class="variables">View.OnClickListener {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 orange">public void</span> <span class="functions">enviarHPP</span><span class="variables">(View view) <span class="orange">throws </span><span class="variables">JSONException {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Calculamos el TimeStamp con formato "AñoMesDíaHoraMinutosSegundos"</span>
+                                        <br>
+                                            <span class="pl-5 variables">SimpleDateFormat s = </span><span class="orange">new </span><span class="variables">SimpleDateFormat(</span><span class="green">"yyyyMMddHHmmss"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">String tiempo = s.format(</span><span class="orange">new </span><span class="variables">Date())</span><span class="orange">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Generamos el Order ID y le asociamos el timestamp para tener un control más exacto</span>
+                                        <br>
+                                            <span class="pl-5 variables">String random = randomString(</span>5<span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">String orderID = tiempo + random</span><span class="orange">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Calculamos el SHA1 de los datos obligatorios que debemos enviar a Addon Payments</span>
+                                        <br>
+                                            <span class="pl-5 variables">String calc1 = Hash.sha1(tiempo + </span><span class="green">".addonphptest." </span><span class="variables">+ orderID + </span><span class="green">".1001.EUR"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Calculamos el SHA1 anterior junto con el secreto compartido</span>
+                                        <br>
+                                            <span class="pl-5 variables">String sha1Final = Hash.sha1(calc1 + </span><span class="green">".secret"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Formamos el JSON que se va a enviar al servidor de Addon Payments</span>
+                                        <br>
+                                            <span class="pl-5 variables">RequestQueue requestQueue = Volley.newRequestQueue(</span><span class="orange">this</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">String URL = </span><span class="green">"https://hpp.sandbox.addonpayments.com/pay"</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">JSONObject jsonBody = </span><span class="orange">new </span><span class="variables">JSONObject()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"TIMESTAMP"</span><span class="orange">,</span><span class="green">"20191122142251"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"MERCHANT_ID"</span><span class="orange">,</span><span class="green">"addonphptest"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"ACCOUNT"</span><span class="orange">,</span><span class="green">"internet"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"AMOUNT"</span><span class="orange">,</span><span class="green">"1001"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"ORDER_ID"</span><span class="orange">,</span><span class="green">"20191125151211SDK_Android-200-5APID"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"SHA1HASH"</span><span class="orange">,</span><span class="green">"308bb8dfbbfcc67c28d602d988ab104c3b08d012"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"MERCHANT_RESPONSE_URL"</span><span class="orange">,</span><span class="green">"https://midominio.es/response.php"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"AUTO_SETTLE_FLAG"</span><span class="orange">,</span><span class="green">"1"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"CURRENCY"</span><span class="orange">,</span><span class="green">"EUR"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"HPP_VERSION"</span><span class="orange">,</span><span class="green">"2"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"HPP_LANG"</span><span class="orange">,</span><span class="green">"ES"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"HPP_CUSTOMER_EMAIL"</span><span class="orange">,</span><span class="green">"test@test.com"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"HPP_CUSTOMER_PHONENUMBER_MOBILE"</span><span class="orange">,</span><span class="green">"914353028"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"CARD_PAYMENT_BUTTON"</span><span class="orange">,</span><span class="green">"Realizar pago"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"PROD_ID"</span><span class="orange">,</span><span class="green">"ID de producto"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"VAR_REF"</span><span class="orange">,</span><span class="green">"VAR REF del producto"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"CUST_NUM"</span><span class="orange">,</span><span class="green">"Número personalizado del producto"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"BILLING_CO"</span><span class="orange">,</span><span class="green">"Código ISO del país de facturación"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"BILLING_CODE"</span><span class="orange">,</span><span class="green">"Código postal del país de facturación"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"SHIPPING_CO"</span><span class="orange">,</span><span class="green">"Código ISO del país de envío"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"SHIPPING_CODE"</span><span class="orange">,</span><span class="green">"Código postal del país de envío"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"COMMENT1"</span><span class="orange">,</span><span class="green">"Comentario 1"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"COMMENT2"</span><span class="orange">,</span><span class="green">"Comentario 2"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">jsonBody.put(</span><span class="green">"SUPPLEMENTARY_DATA"</span><span class="orange">,</span><span class="green">"Datos adicionales"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 orange">final </span><span class="variables">String requestBody = jsonBody.toString()</span><span class="orange">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 variables">StringRequest stringRequest = </span><span class="orange">new </span><span class="variables">StringRequest(Request.Method.</span><span class="purple">POST</span><span class="orange">, </span><span class="variables">URL</span><span class="orange">, new </span><span class="variables">Response.Listener<span class="variables"><</span><span class="variables">String>() {</span>
+                                        <br>
+                                            <span class="pl-7 service">@Override</span>
+                                        <br>
+                                            <span class="pl-7 orange">public void </span><span class="functions">onResponse</span><span class="variables">(String response) {</span>
+                                        <br>
+                                            <span class="pl-9 variables">Toast.makeText(MainActivity.</span><span class="orange">this, </span><span class="variables">response</span><span class="orange">, </span><span class="variables">Toast.</span><span class="purple">LENGTH_SHORT</span><span class="variables">).show()</span><span class="orange">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-9 orange">try </span><span class="variables">{</span>
+                                        <br>
+                                            <span class="pl-11 variables">JSONObject object = </span><span class="orange">new </span><span class="variables">JSONObject(response)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-11 variables">String enlace = object.getString(</span><span class="green">"hppPayByLink"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-11 variables">Intent browserIntent = </span><span class="orange">new </span><span class="variables">Intent(Intent.</span><span class="purple">ACTION_VIEW</span><span class="orange">,</span><span class="variables">Uri.parse(enlace))</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-11 variables">startActivity(browserIntent)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-9 variables">} </span><span class="orange">catch </span><span class="variables">(JSONException e) {</span>
+                                        <br>
+                                            <span class="pl-11 variables">e.printStackTrace()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-9 variables">}</span>
+                                        <br>
+                                            <span class="pl-7 variables">}</span>
+                                        <br>
+                                            <span class="pl-5 variables">} </span><span class="orange">, new </span><span class="variables">Response.ErrorListener() {</span>
+                                        <br>
+                                            <span class="pl-7 service">@Override</span>
+                                        <br>
+                                            <span class="pl-7 orange">public void </span><span class="functions">onErrorResponse</span><span class="variables">(VolleyError error) {</span>
+                                        <br>
+                                            <span class="pl-9 variables">Log.e(</span><span class="green">"VOLLEY"</span><span class="orange">, </span><span class="variables">error.toString())</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-9 variables">Toast.makeText(MainActivity.</span><span class="orange">this, </span><span class="variables">error.toString()</span><span class="orange">, </span><span class="variables">Toast.</span><span class="purple">LENGTH_SHORT</span><span class="variables">).show()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 variables">}</span>
+                                        <br>
+                                            <span class="pl-5 variables">}) {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-7 service">@Override</span>
+                                        <br>
+                                            <span class="pl-7 orange">public </span><span class="variables">Map<</span><span class="variables">String</span><span class="orange">, </span><span class="variables">String> </span><span class="functions">getHeaders</span><span class="variables">() {</span>
+                                        <br>
+                                            <span class="pl-9 variables">HashMap<</span><span class="variables">String</span><span class="orange">, </span><span class="variables">String> headers = </span><span class="orange">new </span><span class="variables">HashMap<>()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-9 variables">headers.put(</span><span class="green">"Content-Type"</span><span class="orange">,</span><span class="green">"application/json"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-9 orange">return </span><span class="variables">headers</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-7 service">@RequiresApi</span><span class="variables">(api = Build.VERSION_CODES.</span><span class="purple">KITKAT</span><span class="variables">)</span>
+                                        <br>
+                                            <span class="pl-7 service">@Override</span>
+                                        <br>
+                                            <span class="pl-7 orange">public byte</span><span class="variables">[] </span><span class="functions">getBody</span><span class="variables">() </span><span class="orange">throws </span><span class="variables">AuthFailureError {</span>
+                                        <br>
+                                            <span class="pl-9 orange">return </span><span class="purple">requestBody</span><span class="variables">.getBytes(StandardCharsets.</span><span class="purple">UTF_8</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-7 service">@Override</span>
+                                        <br>
+                                            <span class="pl-7 orange">protected </span><span class="variables">Response<</span><span class="variables">String> </span><span class="functions">parseNetworkResponse</span><span class="variables">(NetworkResponse response) {</span>
+                                        <br>
+                                            <span class="pl-9 variables">String responseString = </span><span class="green">""</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-9 orange">if </span><span class="variables">(response != </span><span class="orange">null</span><span class="variables">) {</span>
+                                        <br>
+                                            <span class="pl-11 variables">responseString = String.valueOf(response.</span><span class="purple">statusCode</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-9 variables">}</span>
+                                        <br>
+                                            <span class="pl-9 orange">assert </span><span class="variables">response != </span><span class="orange">null;</span>
+                                        <br>
+                                            <span class="pl-9 orange">return super</span><span class="variables">.parseNetworkResponse(response)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 variables">}</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">requestQueue.add(stringRequest)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                            <span class="variables">}</span>
+                                    </code>
+                                </div>
+
+                                <p class="pt-4">
+                                    Archivo "Hash.java"
+                                </p>
+
+                                <hr>
+
+                                <div class="p-4 panelCode">
+                                    <code>
+                                            <span class="comments">// Archivo Hash.java</span>
+                                        <br>
+                                            <span class="orange">public class </span><span class="variables">Hash {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 orange">public static </span><span class="variables">String </span><span class="functions">getHash</span><span class="variables">(String txt</span><span class="orange">, </span><span class="variables">String hashType) {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Retorna un hash a partir de un texto</span>
+                                        <br>
+                                            <span class="pl-5 orange">try </span><span class="variables">{</span>
+                                        <br>
+                                            <span class="pl-7 variables">java.security.MessageDigest md = java.security.MessageDigest.getInstance(hashType)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 orange">byte</span><span class="variables">[] array = md.digest(txt.getBytes())</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 variables">StringBuffer sb = </span><span class="orange">new </span><span class="variables">StringBuffer()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 orange">for </span><span class="variables">(</span><span class="orange">int </span><span class="variables">i = </span>0<span class="orange">; </span><span class="variables">i < array.</span><span class="purple">length</span><span class="orange">; </span><span class="variables">++i) {</span>
+                                        <br>
+                                            <span class="pl-9 variables">sb.append(Integer.toHexString((array[i] & </span>0xFF<span class="variables">) | </span>0x100<span class="variables">).substring(</span>1<span class="orange">, </span>3<span class="variables">))</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 variables">}</span>
+                                        <br>
+                                            <span class="pl-7 orange">return </span><span class="variables">sb.toString()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">} </span><span class="orange">catch </span><span class="variables">(java.security.NoSuchAlgorithmException e) {</span>
+                                        <br>
+                                            <span class="pl-7 variables">System.</span><span class="purple">out</span><span class="variables">.println(e.getMessage())</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                            <span class="pl-5 orange">return null;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 comments">// Llamamos a la función "getHash" pasándole los parámetros a calcular</span>
+                                        <br>
+                                            <span class="pl-3 orange">public static </span><span class="variables">String </span><span class="functions">sha1</span><span class="variables">(String txt) {</span>
+                                        <br>
+                                            <span class="pl-5 orange">return </span><span class="variables">Hash.getHash(txt</span><span class="orange">,</span><span class="green">"SHA1"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                            <span class="variables">}</span>
+                                    </code>
+                                </div>
+
+                                <p class="pt-4">
+                                    Archivo "orderID.java"
+                                </p>
+
+                                <hr>
+
+                                <div class="p-4 panelCode">
+                                    <code>
+                                            <span class="comments">// Archivo orderID.java</span>
+                                        <br>
+                                            <span class="orange">import </span><span class="variables">java.util.Random</span><span class="orange">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="orange">public class </span><span class="variables">orderID {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 comments">// Indicamos una cadena a mostrar de forma aleatoria</span>
+                                        <br>
+                                            <span class="pl-3 orange">public static final </span><span class="variables">String </span><span class="purple">DATA </span><span class="variables">= </span><span class="green">"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-3 orange">public static </span><span class="variables">Random </span><span class="purple">RANDOM </span><span class="variables">= </span><span class="orange">new </span><span class="variables">Random()</span><span class="orange">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 orange">public static </span><span class="variables">String </span><span class="functions">randomString</span><span class="variables">(</span><span class="orange">int </span><span class="variables">len) {</span>
+                                        <br>
+                                            <span class="pl-5 variables">StringBuilder sb = </span><span class="orange">new </span><span class="variables">StringBuilder(len)</span><span class="orange">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 orange">for </span><span class="variables">(</span><span class="orange">int </span><span class="variables">i = </span>0<span class="orange">; </span><span class="variables">i < len</span><span class="orange">; </span><span class="variables">i++) {</span>
+                                        <br>
+                                            <span class="pl-7 variables">sb.append(</span><span class="purple">DATA</span><span class="variables">.charAt(</span><span class="purple">RANDOM</span><span class="variables">.nextInt(</span><span class="purple">DATA</span><span class="variables">.length())))</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                            <span class="pl-5 orange">return </span><span class="green">"SDK_Android-200-"</span><span class="variables">+sb.toString()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                            <span class="variables">}</span>
+                                    </code>
+                                </div>
+                            </div>            
+                        </div>
+                        <!-- /Punto 1-->
+
+                        <!-- Punto 2-->
+                        <div class="contenedor">
+                            <div class="pl-3 pt-3 pr-3 mb-3 pb-2 text-justify">
+                                <h3 class="pt-1" id="descripciones">
+                                    2. Descripciones
+                                </h3>
+                                <hr>
+                                
+                                <h5 id="imports">2.1 Imports</h5>
+                                    <p>
+                                       Debemos cargar los imports necesarios para poder procesar la solicitud de autorización vía API:
+                                    </p>
+                                    <p>
+                                        Archivo "MainActivity.java"
+                                    </p>
+
+                                    <div class="p-4 panelCode">
+                                        <code>
+                                                <span class="orange">import <span class="variables">android.content.Intent</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">android.net.Uri</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">android.view.View</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">android.widget.EditText</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">android.widget.Toast</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">android.os.Build</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">android.util.Log</span>;</span>
+                                            <br>
+                                            <br>
+                                                <span class="orange">import <span class="variables">androidx.annotation.RequiresApi</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">com.addonpayments.androidsdk.ui.hpp.clases.Hash</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">com.android.volley.AuthFailureError</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">com.android.volley.NetworkResponse</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">com.android.volley.Request</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">com.android.volley.Response</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">com.android.volley.VolleyError</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">com.android.volley.toolbox.StringRequest</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">com.android.volley.RequestQueue</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">com.android.volley.toolbox.Volley</span>;</span>
+                                            <br>
+                                            <br>
+                                                <span class="orange">import <span class="variables">org.json.JSONException</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">org.json.JSONObject</span>;</span>
+                                            <br>
+                                            <br>
+                                                <span class="orange">import <span class="variables">java.nio.charset.StandardCharsets</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">java.text.SimpleDateFormat</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">java.util.Date</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">java.util.HashMap</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">java.util.Map</span>;</span>
+                                        </code>
+                                    </div>
+
+                                    <p class="pt-4">
+                                        Archivo "Hash.java"
+                                    </p>
+
+                                    <div class="p-4 panelCode">
+                                        <code>
+                                            <span class="comments">// no contiene imports</span>
+                                        </code>
+                                    </div>
+
+                                    <p class="pt-4">
+                                        Archivo "orderID.java"
+                                    </p>
+
+                                    <div class="p-4 mb-5 panelCode">
+                                        <code>
+                                            <span class="orange">import <span class="variables">java.util.Random</span>;</span>
+                                        </code>
+                                    </div>
+
+                                    <hr>
+
+                                    <h5 id="mainActivity" class="mt-3">2.2 MainActivity.java</h5>
+
+                                    <p>
+                                       Para enviar la operación a los servidores de Addon Payments y abrir nuestro navegador, debemos realizar una función que contenga toda la información de los datos que vamos a enviar una vez pulsemos el botón "enviarHPP":
+                                    </p>
+                                    <ul>
+                                       <li>
+                                           <div class="p-3 panelCode">
+                                               <code>
+                                                        <span class="orange">public class  </span><span class="variables">MainActivity</span> <span class="orange">extends</span> <span class="variables">AppCompatActivity</span> <span class="orange">implements</span> <span class="variables">View.OnClickListener {</span>
+                                                    <br>
+                                                    <br>
+                                                        <span class="pl-3 service">@Override</span>
+                                                    <br>
+                                                        <span class="pl-3 orange">public void</span> <span class="functions">enviarHPP</span><span class="variables">(View view) <span class="orange">throws </span><span class="variables">JSONException { ... }</span>
+                                                    <br>
+                                                    <br>
+                                                        <span class="variables">}</span>
+                                                </code>
+                                            </div>
+                                       </li>
+                                    </ul>
+
+                                    <p>
+                                       Calculamos el TimeStamp con el formato permitido por el servidor de Addon Payments "AñoMesDíaHoraMinutosSegundos":
+                                    </p>
+                                    <ul>
+                                        <li>
+                                           <div class="p-3 panelCode">
+                                               <code>
+                                                        <span class="variables">SimpleDateFormat s = </span><span class="orange">new </span><span class="variables">SimpleDateFormat(</span><span class="green">"yyyyMMddHHmmss"</span><span class="variables">)</span><span class="orange">;</span>
+                                                    <br>
+                                                        <span class="variables">String tiempo = s.format(</span><span class="orange">new </span><span class="variables">Date())</span><span class="orange">;</span>
+                                                </code>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                    <p>
+                                       Generamos el Order ID llamando a la función "randomstring()" indicando cuántos parámetros queremos mostrar. Para tener un control más exacto sobre el tiempo de la operación, concatenamos el TimeStamp y el orderID resultante:
+                                    </p>
+                                    <ul>
+                                        <li>
+                                           <div class="p-3 panelCode">
+                                               <code>
+                                                        <span class="variables">String random = randomString(</span>5<span class="variables">)</span><span class="orange">;</span>
+                                                    <br>
+                                                        <span class="variables">String orderID = tiempo + random</span><span class="orange">;</span>
+                                                </code>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                    <p>
+                                       Calculamos el hash SHA1 con lo siguientes parámetros introduciendo un "." como string entre cada parámetro:
+                                    </p>
+                                    <ul>
+                                        <li>
+                                            TimeStamp.Merchant_ID.OrderID.Amount.Currency
+                                        </li>
+                                        <ul>
+                                            <li>
+                                                <b>"20191125144421.addonphptest.20191125144421SDK_Android-200-XWYS6g.1001.EUR"</b>
+                                            </li>
+                                            <li>
+                                               <div class="p-3 panelCode">
+                                                   <code>
+                                                        <span class="variables">String calc1 = Hash.sha1(tiempo + </span><span class="green">".addonphptest." </span><span class="variables">+ orderID + </span><span class="green">".1001.EUR"</span><span class="variables">)</span><span class="orange">;</span>
+                                                    </code>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </ul>
+
+                                    <p>
+                                       Calculamos el hash SHA1 anterior junto con el secreto compartido facilitado por el equipo de soporte:
+                                    </p>
+                                    <ul>
+                                        <li>
+                                           <div class="p-3 panelCode">
+                                               <code>
+                                                    <span class="variables">String sha1Final = Hash.sha1(calc1 + </span><span class="green">".secret"</span><span class="variables">)</span><span class="orange">;</span>
+                                                </code>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                    <p>
+                                       Formamos el JSON que se va a enviar al servidor de Addon Payments indicando los parámetros de la operación:
+                                       <small class="form-text text-muted alert alert-primary">
+                                           --&gt; La URL de respuesta debe ser la de su servidor. Una vez finalizada la transacción, el cliente verá el mensaje que usted haya programado en esa URL de respuesta. Si quiere obtener más información sobre la URL de respuesta, puede ver nuestra <a target="_blank" href="https://desarrolladores.addonpayments.com/#!/hpp/transaction-processing">documentación oficial</a>.
+                                       </small>
+                                    </p>
+                                    <ul>
+                                        <li>
+                                           <div class="p-3 panelCode">
+                                               <code>
+                                                    <span class="variables">RequestQueue requestQueue = Volley.newRequestQueue(</span><span class="orange">this</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">String URL = </span><span class="green">"https://hpp.sandbox.addonpayments.com/pay"</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">JSONObject jsonBody = </span><span class="orange">new </span><span class="variables">JSONObject()</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"TIMESTAMP"</span><span class="orange">,</span><span class="green">"20191122142251"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"MERCHANT_ID"</span><span class="orange">,</span><span class="green">"addonphptest"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"ACCOUNT"</span><span class="orange">,</span><span class="green">"internet"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"AMOUNT"</span><span class="orange">,</span><span class="green">"1001"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"ORDER_ID"</span><span class="orange">,</span><span class="green">"20191125151211SDK_Android-200-5APID"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"SHA1HASH"</span><span class="orange">,</span><span class="green">"308bb8dfbbfcc67c28d602d988ab104c3b08d012"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"MERCHANT_RESPONSE_URL"</span><span class="orange">,</span><span class="green">"https://midominio.es/response.php"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"AUTO_SETTLE_FLAG"</span><span class="orange">,</span><span class="green">"1"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"CURRENCY"</span><span class="orange">,</span><span class="green">"EUR"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"HPP_VERSION"</span><span class="orange">,</span><span class="green">"2"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"HPP_LANG"</span><span class="orange">,</span><span class="green">"ES"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"HPP_CUSTOMER_EMAIL"</span><span class="orange">,</span><span class="green">"test@test.com"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"HPP_CUSTOMER_PHONENUMBER_MOBILE"</span><span class="orange">,</span><span class="green">"914353028"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"CARD_PAYMENT_BUTTON"</span><span class="orange">,</span><span class="green">"Realizar pago"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"PROD_ID"</span><span class="orange">,</span><span class="green">"ID de producto"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"VAR_REF"</span><span class="orange">,</span><span class="green">"VAR REF del producto"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"CUST_NUM"</span><span class="orange">,</span><span class="green">"Número personalizado del producto"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"BILLING_CO"</span><span class="orange">,</span><span class="green">"Código ISO del país de facturación"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"BILLING_CODE"</span><span class="orange">,</span><span class="green">"Código postal del país de facturación"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"SHIPPING_CO"</span><span class="orange">,</span><span class="green">"Código ISO del país de envío"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"SHIPPING_CODE"</span><span class="orange">,</span><span class="green">"Código postal del país de envío"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"COMMENT1"</span><span class="orange">,</span><span class="green">"Comentario 1"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"COMMENT2"</span><span class="orange">,</span><span class="green">"Comentario 2"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">jsonBody.put(</span><span class="green">"SUPPLEMENTARY_DATA"</span><span class="orange">,</span><span class="green">"Datos adicionales"</span><span class="variables">)</span><span class="orange">;</span>
+                                                </code>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                    <p>
+                                       Usamos el método de Java <a target="_blank" href="https://es.wikibooks.org/wiki/Programaci%C3%B3n_en_Java/La_palabra_reservada_final">'final'</a> para indicar el tipo de las variables que vamos a crear:
+                                    </p>
+                                    <ul>
+                                        <li>
+                                           <div class="p-3 panelCode">
+                                               <code>
+                                                    <span class="orange">final</span> <span class="variables">String requestBody = jsonBody.toString()</span><span class="orange">;</span>
+                                                </code>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                    <p>
+                                       Enviamos la petición mediante el método POST al servidor de Addon Payments:
+                                    </p>
+                                    <ul>
+                                        <li>
+                                            <div class="p-3 panelCode">
+                                                <code>
+                                                    <span class="comments">// Iniciamos la petición indicando el método de envío (POST), la URL del servidor de Addon Payments y para la respuesta iniciamos el evento de escucha <a target="_blank" href="https://developer.android.com/training/volley/simple">'Listener' (Response.Listener)</a></span>
+                                                <br>
+                                                    <span class="variables">StringRequest stringRequest = </span><span class="orange">new </span><span class="variables">StringRequest(Request.Method.</span><span class="purple">POST</span><span class="orange">, </span><span class="variables">URL</span><span class="orange">, new </span><span class="variables">Response.Listener<span class="variables"><</span><span class="variables">String>() {</span>
+                                                <br>
+                                                    <span class="pl-3 service">@Override</span>
+                                                <br>
+                                                    <span class="pl-3 orange">public void </span><span class="functions">onResponse</span><span class="variables">(String response) {</span>
+                                                <br>
+                                                    <span class="pl-5 variables">Toast.makeText(MainActivity.</span><span class="orange">this, </span><span class="variables">response</span><span class="orange">, </span><span class="variables">Toast.</span><span class="purple">LENGTH_SHORT</span><span class="variables">).show()</span><span class="orange">;</span>
+                                                <br>
+                                                <br>
+                                                    <span class="pl-5 orange">try </span><span class="variables">{</span>
+                                                <br>
+                                                    <span class="pl-7 variables">JSONObject object = </span><span class="orange">new </span><span class="variables">JSONObject(response)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-7 variables">String enlace = object.getString(</span><span class="green">"hppPayByLink"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-7 variables">Intent browserIntent = </span><span class="orange">new </span><span class="variables">Intent(Intent.</span><span class="purple">ACTION_VIEW</span><span class="orange">,</span><span class="variables">Uri.parse(enlace))</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-7 variables">startActivity(browserIntent)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 variables">} </span><span class="orange">catch </span><span class="variables">(JSONException e) {</span>
+                                                <br>
+                                                    <span class="pl-7 variables">e.printStackTrace()</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 variables">}</span>
+                                                <br>
+                                                    <span class="pl-3 variables">}</span>
+                                                <br>
+                                                    <span class="variables">} </span><span class="orange">, new </span><span class="variables">Response.ErrorListener() {</span>
+                                                <br>
+                                                    <span class="pl-3 service">@Override</span>
+                                                <br>
+                                                    <span class="pl-3 orange">public void </span><span class="functions">onErrorResponse</span><span class="variables">(VolleyError error) {</span>
+                                                <br>
+                                                    <span class="pl-5 variables">Log.e(</span><span class="green">"VOLLEY"</span><span class="orange">, </span><span class="variables">error.toString())</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 variables">Toast.makeText(MainActivity.</span><span class="orange">this, </span><span class="variables">error.toString()</span><span class="orange">, </span><span class="variables">Toast.</span><span class="purple">LENGTH_SHORT</span><span class="variables">).show()</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-3 variables">}</span>
+                                                <br>
+                                                    <span class="variables">}) {</span>
+                                                <br>
+                                                <br>
+                                                    <span class="pl-3 service">@Override</span>
+                                                <br>
+                                                    <span class="pl-3 orange">public </span><span class="variables">Map<</span><span class="variables">String</span><span class="orange">, </span><span class="variables">String> </span><span class="functions">getHeaders</span><span class="variables">() {</span>
+                                                <br>
+                                                    <span class="pl-5 variables">HashMap<</span><span class="variables">String</span><span class="orange">, </span><span class="variables">String> headers = </span><span class="orange">new </span><span class="variables">HashMap<>()</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 variables">headers.put(</span><span class="green">"Content-Type"</span><span class="orange">,</span><span class="green">"application/json"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 orange">return </span><span class="variables">headers</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-3 variables">}</span>
+                                                <br>
+                                                <br>
+                                                    <span class="pl-3 service">@RequiresApi</span><span class="variables">(api = Build.VERSION_CODES.</span><span class="purple">KITKAT</span><span class="variables">)</span>
+                                                <br>
+                                                    <span class="pl-3 service">@Override</span>
+                                                <br>
+                                                    <span class="pl-3 orange">public byte</span><span class="variables">[] </span><span class="functions">getBody</span><span class="variables">() </span><span class="orange">throws </span><span class="variables">AuthFailureError {</span>
+                                                <br>
+                                                    <span class="pl-5 orange">return </span><span class="purple">requestBody</span><span class="variables">.getBytes(StandardCharsets.</span><span class="purple">UTF_8</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-3 variables">}</span>
+                                                <br>
+                                                <br>
+                                                    <span class="pl-3 service">@Override</span>
+                                                <br>
+                                                    <span class="pl-3 orange">protected </span><span class="variables">Response<</span><span class="variables">String> </span><span class="functions">parseNetworkResponse</span><span class="variables">(NetworkResponse response) {</span>
+                                                <br>
+                                                    <span class="pl-5 variables">String responseString = </span><span class="green">""</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 orange">if </span><span class="variables">(response != </span><span class="orange">null</span><span class="variables">) {</span>
+                                                <br>
+                                                    <span class="pl-7 variables">responseString = String.valueOf(response.</span><span class="purple">statusCode</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 variables">}</span>
+                                                <br>
+                                                    <span class="pl-5 orange">assert </span><span class="variables">response != </span><span class="orange">null;</span>
+                                                <br>
+                                                    <span class="pl-5 orange">return super</span><span class="variables">.parseNetworkResponse(response)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-3 variables">}</span>
+                                                <br>
+                                                    <span class="variables">}</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">requestQueue.add(stringRequest)</span><span class="orange">;</span>
+                                                </code>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                <hr>
+
+                                <h5 id="hash" class="mt-3">
+                                    2.3 Hash.java
+                                </h5>
+
+                                 <p>
+                                   Creamos la clase pública que calcula el hash SHA1 pasándole los parámetros obligatorios:
+                                </p>
+                                <ul>
+                                    <li class="pb-3">
+                                        TimeStamp.Merchant_ID.OrderID.Amount.Currency
+                                    </li>
+                                   <li>
+                                       <div class="p-3 panelCode">
+                                           <code>
+                                                    <span class="comments">// Archivo Hash.java</span>
+                                                <br>
+                                                    <span class="orange">public class </span><span class="variables">Hash {</span>
+                                                <br>
+                                                <br>
+                                                    <span class="pl-3 orange">public static </span><span class="variables">String </span><span class="functions">getHash</span><span class="variables">(String txt</span><span class="orange">, </span><span class="variables">String hashType) {</span>
+                                                <br>
+                                                <br>
+                                                    <span class="pl-5 comments">// Retorna un hash a partir de un texto</span>
+                                                <br>
+                                                    <span class="pl-5 orange">try </span><span class="variables">{</span>
+                                                <br>
+                                                    <span class="pl-7 variables">java.security.MessageDigest md = java.security.MessageDigest.getInstance(hashType)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-7 orange">byte</span><span class="variables">[] array = md.digest(txt.getBytes())</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-7 variables">StringBuffer sb = </span><span class="orange">new </span><span class="variables">StringBuffer()</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-7 orange">for </span><span class="variables">(</span><span class="orange">int </span><span class="variables">i = </span>0<span class="orange">; </span><span class="variables">i < array.</span><span class="purple">length</span><span class="orange">; </span><span class="variables">++i) {</span>
+                                                <br>
+                                                    <span class="pl-9 variables">sb.append(Integer.toHexString((array[i] & </span>0xFF<span class="variables">) | </span>0x100<span class="variables">).substring(</span>1<span class="orange">, </span>3<span class="variables">))</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-7 variables">}</span>
+                                                <br>
+                                                    <span class="pl-7 orange">return </span><span class="variables">sb.toString()</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 variables">} </span><span class="orange">catch </span><span class="variables">(java.security.NoSuchAlgorithmException e) {</span>
+                                                <br>
+                                                    <span class="pl-7 variables">System.</span><span class="purple">out</span><span class="variables">.println(e.getMessage())</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 variables">}</span>
+                                                <br>
+                                                    <span class="pl-5 orange">return null;</span>
+                                                <br>
+                                                    <span class="pl-3 variables">}</span>
+                                                <br>
+                                                <br>
+                                                    <span class="pl-3 comments">// Llamamos a la función "getHash" pasándole los parámetros a calcular</span>
+                                                <br>
+                                                    <span class="pl-3 orange">public static </span><span class="variables">String </span><span class="functions">sha1</span><span class="variables">(String txt) {</span>
+                                                <br>
+                                                    <span class="pl-5 orange">return </span><span class="variables">Hash.getHash(txt</span><span class="orange">,</span><span class="green">"SHA1"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-3 variables">}</span>
+                                                <br>
+                                                    <span class="variables">}</span>
+                                            </code>
+                                        </div>
+                                   </li>
+                                </ul>
+
+                                <hr>
+
+                                <h5 id="orderid" class="mt-3">
+                                    2.4 orderID.java
+                                </h5>
+
+                                 <p>
+                                   Para generar un Order ID único, hemos creado la clase "orderID.java" en el cual le indicamos el timestamp de la operación, la versión del SDK y caracteres aleatorios.
+                                </p>
+                                <ul>
+                                   <li>
+                                       <div class="p-3 panelCode">
+                                           <code>
+                                                    <span class="comments">// Archivo "orderID.java"</span>
+                                                <br>
+                                                    <span class="orange">public class </span><span class="variables">orderID {</span>
+                                                <br>
+                                                <br>
+                                                    <span class="pl-3 comments">// Indicamos una cadena a mostrar de forma aleatoria</span>
+                                                <br>
+                                                    <span class="pl-3 comments">// Indicamos los caracteres que queremos mostrar de forma aleatoria</span>
+                                                <br>
+                                                    <span class="pl-3 orange">public static final </span><span class="variables">String </span><span class="purple">DATA </span><span class="variables">= </span><span class="green">"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-3 orange">public static </span><span class="variables">Random </span><span class="purple">RANDOM </span><span class="variables">= </span><span class="orange">new </span><span class="variables">Random()</span><span class="orange">;</span>
+                                                <br>
+                                                <br>
+                                                    <span class="pl-3 orange">public static </span><span class="variables">String </span><span class="functions">randomString</span><span class="variables">(</span><span class="orange">int </span><span class="variables">len) {</span>
+                                                <br>
+                                                    <span class="pl-5 variables">StringBuilder sb = </span><span class="orange">new </span><span class="variables">StringBuilder(len)</span><span class="orange">;</span>
+                                                <br>
+                                                <br>
+                                                    <span class="pl-5 orange">for </span><span class="variables">(</span><span class="orange">int </span><span class="variables">i = </span>0<span class="orange">; </span><span class="variables">i < len</span><span class="orange">; </span><span class="variables">i++) {</span>
+                                                <br>
+                                                    <span class="pl-7 variables">sb.append(</span><span class="purple">DATA</span><span class="variables">.charAt(</span><span class="purple">RANDOM</span><span class="variables">.nextInt(</span><span class="purple">DATA</span><span class="variables">.length())))</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 variables">}</span>
+                                                <br>
+                                                    <span class="pl-3 comments">// Asociamos la versión del SDK de Android y la concatenamos con los caracteres resultantes en el retorno de la función</span>
+                                                <br>
+                                                    <span class="pl-5 orange">return </span><span class="green">"SDK_Android-200-"</span><span class="variables">+sb.toString()</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-3 variables">}</span>
+                                                <br>
+                                                    <span class="variables">}</span>
+                                            </code>
+                                        </div>
+                                   </li>
+                                </ul>
+
+                                <p>
+                                    Cuando realizamos la llamada a la función de generación del Order ID desde el archivo MainActivity.java, concatenamos el resultado de dicha función con el timestamp de la operación:
+                                </p>
+
+                                <ul>
+                                    <li>
+                                        <div class="p-3 panelCode">
+                                            <code>
+                                                    <span class="comments">// Función de TimeStamp</span>
+                                                <br>
+                                                    <span class="variables">SimpleDateFormat s = </span><span class="orange">new </span><span class="variables">SimpleDateFormat(</span><span class="green">"yyyyMMddHHmmss"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">String tiempo = s.format(</span><span class="orange">new </span><span class="variables">Date())</span><span class="orange">;</span>
+                                                <br>
+                                                <br>
+                                                    <span class="comments">// Generamos el Order ID llamando a la función randomString() e indicando que queremos sólo 5 caracteres</span>
+                                                <br>
+                                                    <span class="variables">String random = randomString(</span>5<span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">String orderID = tiempo + random</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="comments">// Salida: 20191125151211SDK_Android-200-5APID</span>
+                                             </code>
+                                         </div>
+                                    </li>
+                                </ul>
+
+                                <hr>
+
+                                <h5 id="buildgradle" class="mt-3">
+                                    2.5 build.gradle
+                                </h5>
+
+                                <p>
+                                    Las librerías que implementamos en la <a href="https://github.com/AddonPayments/android-sdk/tree/master/app">aplicación de ejemplo</a> son las siguientes:
+                                </p>
+                                <ul>
+                                    <li>
+                                        <div class="p-3 panelCode">
+                                            <code>
+                                                    <span class="variables">dependencies {</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation fileTree(</span><span class="green">dir</span><span class="variables">: </span><span class="green">'libs'</span><span class="variables">, </span><span class="green">include</span><span class="variables">: [</span><span class="green">'*.jar'</span><span class="variables">])</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'androidx.appcompat:appcompat:1.1.0'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'com.google.android.material:material:1.0.0'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'androidx.constraintlayout:constraintlayout:1.1.3'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'androidx.navigation:navigation-fragment:2.1.0'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'androidx.navigation:navigation-ui:2.1.0'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'androidx.lifecycle:lifecycle-extensions:2.1.0'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'com.android.volley:volley:1.1.1'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'junit:junit:4.12'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'androidx.lifecycle:lifecycle-extensions:2.1.0'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'com.google.code.gson:gson:2.8.5'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">testImplementation </span><span class="green">'junit:junit:4.12'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">androidTestImplementation </span><span class="green">'androidx.test.ext:junit:1.1.1'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">androidTestImplementation </span><span class="green">'androidx.test.espresso:espresso-core:3.2.0'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'androidx.gridlayout:gridlayout:1.0.0'</span>
+                                                <br>
+                                                    <span class="variables">}</span>
+                                            </code>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <p>
+                                   <small class="form-text text-muted alert alert-primary">
+                                       --&gt; La versión de compilación del SDK es la 29 y el SDK mínimo compatible es el 15.
+                                   </small>
+                                </p>
+                            </div>            
+                        </div>
+                        <!-- /Punto 2 -->
+                    </div>
+                    <!-- /Contenido común -->
+
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="../../assets/js/barraprogreso.js"></script>
+    </body>
+</html>

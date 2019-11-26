@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AndroidSDK</string>
+    <string name="action_settings">Settings</string>
+    <string name="cvv">CVV</string>
+    <string name="desc">Description:</string>
+    <string name="dir">Address:</string>
+    <string name="envOpButton">SEND TRANSACTION</string>
+    <string name="gateway">Gateway:</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_send">Social Networks</string>
+    <string name="mes">Month</string>
+    <string name="nTitular">Name of titular</string>
+    <string name="numCard">Number of credit card</string>
+    <string name="payNow">Pay now</string>
+    <string name="precio">Price:</string>
+    <string name="ref">Reference:</string>
+    <string name="year">Year</string>
+    <string name="cpEnv">Postal Code:</string>
+    <string name="titleHpp">Travel to New Zealand</string>
+    <string name="titleFragmentApi">Sen transaction via remote</string>
+    <string name="titleFragmentHpp">Send transaction via redirect</string>
+    <string name="ruta">New Zealand route</string>
+    <string name="unidad">1 unit</string>
+</resources>

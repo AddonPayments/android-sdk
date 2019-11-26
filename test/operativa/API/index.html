@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Víctor Cantera">
+        <link rel="icon" href="../../assets/img/comercia_ico.png" type="image/x-icon"/ >
+        <title>Operativa API - SDK Android</title>
+
+        <!-- Bootstrap 4.3.1 -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="../../assets/css/style.css">
+    </head>
+
+    <body>
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-lg navbar-light navbar-rpdc mb-3">
+            <a class="navbar-brand">
+                <img src="../../assets/img/log2.svg" width="30" height="30" class="img-fluid" alt="Logo Addon Payments">
+                <span class="addonNav">ADDON</span> <span>PAYMENTS</span>
+                <span class="d-none d-sm-none d-lg-inline d-xl-inline sdkNav">
+                    <span>
+                        /SDK
+                        <span class="barraNav">_</span>
+                        de
+                        <span class="barraNav">_</span>
+                        Android
+                    </span>
+                </span>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+          </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto pl-2 pr-2">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Inicio
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item pl-2" href="../../index.html">Índice</a>
+                            <a class="dropdown-item pl-2" href="../errores.html">Errores de Addon Payments</a>
+                            <a class="dropdown-item pl-2" href="../informe.html">Convertir informe</a>
+                        </div>
+                    </li>
+                    <li class="nav-item ml-1 dropdown">
+                        <a class="nav-link pl-2 dropdown-toggle active" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Pagos con tarjeta
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-header text-center p-0">API</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2 active" href="#">Operación API</a>
+                            <hr class="m-0 p-0">
+                            <div class="dropdown-header text-center p-0">HPP</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2" href="../HPP/index.html">Operación HPP</a>
+                        </div>
+                    </li>
+                    <li class="nav-item ml-1 dropdown">
+                        <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Validadores
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item pl-2" href="../validadores/validadores.html">Validadores</a>
+                            <a class="dropdown-item pl-2" href="../validadores/validadores.html#cardholder">Nombre del titular</a>
+                            <a class="dropdown-item pl-2" href="../validadores/validadores.html#numberCard">Número de tarjeta</a>
+                            <a class="dropdown-item pl-2" href="../validadores/validadores.html#cvn">CVN</a>
+                            <a class="dropdown-item pl-2" href="../validadores/validadores.html#mes">Mes</a>
+                            <a class="dropdown-item pl-2" href="../validadores/validadores.html#año">Año</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /NAVBAR -->
+        
+        <div class="col-lg-12"> 
+            <div id="contenidoComun" class="container-fluid">
+                <div class="row">
+
+                    <!-- Menú lateral -->
+                    <div class="col-lg-2 sticky-top d-none d-sm-none d-lg-block d-xl-block MenuLateral">
+
+                        <!-- Barra de progreso -->
+                        <div class="progress-bar" id="progreso"></div>
+                        <!-- /Barra de progreso -->
+
+                        <nav class="navbar sticky-top navbar-light" style="padding: 0px;">
+                            <nav class="nav nav-pills flex-column">
+                                <a class="nav-link" href="#api">1. Operativa API</a>
+                                <nav>
+                                  <a class="nav-link ml-3 my-1" href="#codigoEjemplo">1.1 Código de ejemplo</a>
+                                </nav>
+                                <a class="nav-link" href="#descripciones">2. Descripciones</a>
+                                <nav class="nav nav-pills flex-column">
+                                  <a class="nav-link ml-3 my-1" href="#imports">2.1 Imports</a>
+                                  <a class="nav-link ml-3 my-1" href="#mainActivity">2.2 MainActivity.java</a>
+                                  <a class="nav-link ml-3 my-1" href="#enviarApi">2.3 EnviarApi.java</a>
+                                  <a class="nav-link ml-3 my-1" href="#buildgradle">2.4 build.gradle</a>
+                                </nav>
+                            </nav>
+                        </nav>
+                    </div>
+                    <!-- /Menú lateral -->
+
+                    <!-- Contenido común -->
+                    <div class="col-lg-10" >
+
+                        <!-- Punto 1-->
+                        <div class="contenedor">
+                            <div class="pl-3 pt-3 pr-3 pb-4 mb-3 text-justify">
+                                <h3 id="api" class="titulo">
+                                    1. Operación a través de API
+                                </h3>
+                                <hr>
+
+                                <p>
+                                        Para procesar una transacción desde un cliente Android, debe enviar los datos de la tarjeta a su servidor con una de <a target="_blank" href="https://github.com/AddonPayments/">nuestras librerías</a> preparadas para procesar pagos.
+                                    <br>
+                                    <br>
+                                        Hemos creado las clases para validar y verificar los campos de su formulario en Android antes de enviar la operación a su servidor. Los comercios que capturan datos en su aplicación (y en su servidor) deben ser conscientes de sus <a target="_blank" href="https://www.pcisecuritystandards.org/">responsabilidades de cumplimiento de PCI DSS.</a>
+                                </p>
+                                <h5 class="pt-3" id="codigoEjemplo">1.1 Código de ejemplo (archivo MainActivity.java y EnvioApi.java)</h5>
+
+                                <hr>
+
+                                <p>
+                                    Archivo "MainActivity.java"
+                                </p>
+
+                                <div class="p-4 panelCode">
+                                    <code>
+                                        <span class="comments">// Archivo MainActivity.java</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">android.content.DialogInterface</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">android.content.Intent</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">android.view.View</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">android.widget.EditText</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">android.widget.Toast</span>;</span>
+                                        <br>
+                                        <br>
+                                            <span class="orange">import <span class="variables">com.addonpayments.androidsdk.ui.api.EnvioApi</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">com.addonpayments.androidsdk.validaciones.AddonPaymentsRemote</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">com.android.volley.AuthFailureError</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">com.android.volley.Request</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">com.android.volley.Response</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">com.android.volley.VolleyError</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">com.android.volley.toolbox.StringRequest</span>;</span>
+                                        <br>
+                                        <br>
+                                            <span class="orange">import <span class="variables">java.util.HashMap</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">java.util.Map</span>;</span>
+                                        <br>
+                                        <br>
+                                            <span class="orange">public class  </span><span class="variables">MainActivity</span> <span class="orange">extends</span> <span class="variables">AppCompatActivity</span> <span class="orange">implements</span> <span class="variables">View.OnClickListener {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 service">@Override</span>
+                                        <br>
+                                            <span class="pl-3 orange">public void</span> <span class="functions">onClick</span><span class="variables">(View v) {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 orange">final</span> <span class="variables">EditText Numero</span><span class="orange">,</span> <span class="variables">Mes</span><span class="orange">,</span> <span class="variables">Any</span><span class="orange">,</span> <span class="variables">CVV</span><span class="orange">,</span> <span class="variables">Nombre</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 orange">final</span> <span class="variables">String server_url =</span> <span class="green">"https://midominio.es"</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 orange">final</span> <span class="variables">AlertDialog.Builder builder</span><span class="orange">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 variables">Numero = findViewById(R.id.</span><span class="purple">numbertext</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">Mes = findViewById(R.id.</span><span class="purple">mestext</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">Any = findViewById(R.id.</span><span class="purple">anytext</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">CVV = findViewById(R.id.</span><span class="purple">cvvtext</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">Nombre = findViewById(R.id.</span><span class="purple">nombretext</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 variables">builder = </span><span class="orange">new</span> <span class="variables">AlertDialog.Builder(MainActivity.</span><span class="orange">this</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="comments pl-5">// Iniciamos los validadores</span>
+                                        <br>
+                                            <span class="pl-5 orange">if</span> <span class="variables">(!AddonPaymentsRemote.ValidateCardNumber(Numero)) {</span>
+                                            <br>
+                                                <span class="pl-7 orange">return;</span>
+                                            <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 orange">if</span> <span class="variables">(!AddonPaymentsRemote.ValidateMesFormat(Mes)) {</span>
+                                            <br>
+                                                <span class="pl-7 orange">return;</span>
+                                            <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 orange">if</span> <span class="variables">(!AddonPaymentsRemote.ValidateYearFormat(Any)) {</span>
+                                            <br>
+                                                <span class="pl-7 orange">return;</span>
+                                            <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 orange">if</span> <span class="variables">(!AddonPaymentsRemote.validateCvn(CVV)) {</span>
+                                            <br>
+                                                <span class="pl-7 orange">return;</span>
+                                            <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 orange">if</span> <span class="variables">(!AddonPaymentsRemote.ValidateCardHolderName(Nombre)) {</span>
+                                            <br>
+                                                <span class="pl-7 orange">return;</span>
+                                            <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 variables">Toast.makeText(MainActivity.</span><span class="orange">this,</span> <span class="green">"Enviando petición"</span><span class="orange">,</span> <span class="variables">Toast.</span><span class="purple">LENGTH_SHORT</span><span class="variables">).show()</span><span class="orange">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 variables">StringRequest stringRequest = </span><span class="orange">new</span> <span class="variables">StringRequest(Request.Method.</span><span class="purple">POST</span><span class="orange">,</span> <span class="variables">server_url</span><span class="orange">, new </span><span class="variables">Response.Listener<span class="variables"><</span><span class="variables">String>() {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-7 service">@Override</span>
+                                        <br>
+                                            <span class="pl-7 orange">public void </span><span class="functions">onResponse</span><span class="variables">(String response) {</span>
+                                        <br>
+                                            <span class="pl-9 purple">builder</span><span class="variables">.setTitle(</span><span class="green">"Respuesta del servidor"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-9 purple">builder</span><span class="variables">.setMessage(</span><span class="green">"Petición enviada:</span><span class="orange">\n\n</span><span class="green">"</span> <span class="variables">+ response)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-9 purple">builder</span><span class="variables">.setPositiveButton(</span><span class="green">"Cerrar ventana"</span><span class="orange">, new </span><span class="variables">DialogInterface.OnClickListener() {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-9 service">@Override</span>
+                                        <br>
+                                            <span class="pl-9 orange">public void </span><span class="functions">onClick</span><span class="variables">(DialogInterface dialog</span><span class="orange">, int </span><span class="variables">which) {</span>
+                                        <br>
+                                            <span class="pl-11 purple">Numero</span><span class="variables">.setText(</span><span class="green">""</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-11 purple">Mes</span><span class="variables">.setText(</span><span class="green">""</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-11 purple">Any</span><span class="variables">.setText(</span><span class="green">""</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-11 purple">CVV</span><span class="variables">.setText(</span><span class="green">""</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-11 purple">Nombre</span><span class="variables">.setText(</span><span class="green">""</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-11 variables">}</span>
+                                        <br>
+                                            <span class="pl-9 variables">})</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-9 variables">AlertDialog alertDialog = </span><span class="purple">builder</span><span class="variables">.create()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-9 variables">alertDialog.show()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 variables">}</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span><span class="orange">, new </span><span class="variables">Response.ErrorListener() {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-7 service">@Override</span>
+                                        <br>
+                                            <span class="pl-7 orange">public void </span><span class="functions">onErrorResponse</span><span class="variables">(VolleyError error) {</span>
+                                        <br>
+                                            <span class="pl-9 variables">Toast.makeText(MainActivity.</span><span class="orange">this, </span><span class="green">"Error en la conexión con su servidor"</span><span class="orange">, </span><span class="variables">Toast.</span><span class="purple">LENGTH_SHORT</span><span class="variables">).show()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-9 variables">error.printStackTrace()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 variables">}</span>
+                                        <br>
+                                            <span class="pl-5 variables">}) {</span>
+                                        <br>
+                                            <span class="pl-7 service">@Override</span>
+                                        <br>
+                                            <span class="pl-7 orange">protected </span><span class="variables">Map<span class="variables"><</span>String</span><span class="orange">, </span><span class="variables">String> </span><span class="functions">getParams</span><span class="variables">() </span><span class="orange">throws </span><span class="variables">AuthFailureError {</span>
+                                        <br>
+                                            <span class="pl-7 variables">Map<span class="variables"><</span>String</span><span class="orange">, </span> <span class="variables">String> params = </span><span class="orange">new </span><span class="variables">HashMap<span class="variables"><</span>String, String>()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-9 variables">params.put(</span><span class="green">"numero"</span><span class="orange">, </span><span class="purple">Numero</span><span class="variables">.getText().toString())</span<span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-9 variables">params.put(</span><span class="green">"mes"</span><span class="orange">, </span><span class="purple">Mes</span><span class="variables">.getText().toString())</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-9 variables">params.put(</span><span class="green">"any"</span><span class="orange">, </span><span class="purple">Any</span><span class="variables">.getText().toString())</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-9 variables">params.put(</span><span class="green">"cvv"</span><span class="orange">, </span><span class="purple">CVV</span><span class="variables">.getText().toString())</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-9 variables">params.put(</span><span class="green">"nombre"</span><span class="orange">, </span><span class="purple">Nombre</span><span class="variables">.getText().toString())</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-9 orange">return </span><span class="variables">params</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 variables">}</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">EnvioApi.getInstance(MainActivity.</span><span class="orange">this</span><span class="variables">).addTorequestqueue(stringRequest)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                            <span class="variables">}</span>
+                                        <br>
+                                            <span class="comments">// Fin del archivo MainActivity.java</span>
+                                    </code>
+                                </div>
+
+                                <p class="pt-4">
+                                    Archivo "EnvioApi.java"
+                                </p>
+
+                                <div class="p-4 panelCode">
+                                    <code>
+                                            <span class="comments">// Archivo EnvioApi.java</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">android.content.Context</span>;</span>
+                                        <br>
+                                        <br>
+                                            <span class="orange">import <span class="variables">com.android.volley.Request</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">com.android.volley.RequestQueue</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">com.android.volley.toolbox.Volley</span>;</span>
+                                        <br>
+                                        <br>
+                                            <span class="orange">public class </span><span class="variables">EnvioApi {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 orange">private static </span><span class="variables">EnvioApi</span> <span class="purple">mInstance</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-3 orange">private </span><span class="variables">RequestQueue</span> <span class="purple">requestQueue</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-3 orange">private static </span><span class="variables">Context</span> <span class="purple">mCtx</span><span class="orange">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 orange">private </span><span class="functions">EnvioApi</span><span class="variables">(Context context) {</span>
+                                        <br>
+                                            <span class="pl-5 purple">mCtx </span><span class="variables">= context</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 purple">requestQueue </span><span class="variables">= getRequestQueue()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 orange">public static synchronized </span><span class="variables">EnvioApi </span><span class="functions">getInstance</span><span class="variables">(Context context) {</span>
+                                        <br>
+                                            <span class="pl-5 orange">if</span><span class="variables">(</span><span class="purple">mInstance</span><span class="variables">==</span><span class="orange">null</span><span class="variables">) {</span>
+                                        <br>
+                                            <span class="pl-6 purple">mInstance </span><span class="variables">= </span><span class="orange">new </span><span class="variables">EnvioApi(context)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                            <span class="pl-5 orange">return </span><span class="purple">mInstance</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 orange">public </span><span class="variables">RequestQueue </span><span class="functions">getRequestQueue</span><span class="variables">() {</span>
+                                        <br>
+                                            <span class="pl-5 orange">if</span><span class="variables">(</span><span class="purple">requestQueue</span><span class="variables">==</span><span class="orange">null</span><span class="variables">) {</span>
+                                        <br>
+                                            <span class="pl-6 purple">requestQueue </span><span class="variables">= Volley.newRequestQueue(</span><span class="purple">mCtx</span><span class="variables">.getApplicationContext())</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                            <span class="pl-5 orange">return </span><span class="purple">requestQueue</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 orange">public </span><span class="variables"><span class="variables"><</span>T></span><span class="orange">void </span><span class="functions">addTorequestqueue</span><span class="variables">(Request<</span><span class="variables">T></span> <span class="variables">request) {</span>
+                                        <br>
+                                            <span class="pl-5 purple">requestQueue</span><span class="variables">.add(request)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                            <span class="variables">}</span>
+                                    </code>
+                                </div>
+                            </div>            
+                        </div>
+                        <!-- /Punto 1-->
+
+                        <!-- Punto 2-->
+                        <div class="contenedor">
+                            <div class="pl-3 pt-3 pr-3 mb-3 pb-2 text-justify">
+                                <h3 class="pt-1" id="descripciones">
+                                    2. Descripciones
+                                </h3>
+                                <hr>
+                                
+                                <h5 id="imports">2.1 Imports</h5>
+                                    <p>
+                                       Debemos cargar los imports necesarios para poder procesar la solicitud de autorización vía API:
+                                    </p>
+                                    <p>
+                                        Archivo "MainActivity.java"
+                                    </p>
+
+                                    <div class="p-4 panelCode">
+                                        <code>
+                                                <span class="orange">import <span class="variables">android.content.DialogInterface</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">android.content.Intent</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">android.view.View</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">android.widget.EditText</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">android.widget.Toast</span>;</span>
+                                            <br>
+                                            <br>
+                                                <span class="orange">import <span class="variables">com.addonpayments.androidsdk.ui.api.EnvioApi</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">com.addonpayments.androidsdk.validaciones.AddonPaymentsRemote</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">com.android.volley.AuthFailureError</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">com.android.volley.Request</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">com.android.volley.Response</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">com.android.volley.VolleyError</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">com.android.volley.toolbox.StringRequest</span>;</span>
+                                            <br>
+                                            <br>
+                                                <span class="orange">import <span class="variables">java.util.HashMap</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">java.util.Map</span>;</span>
+                                        </code>
+                                    </div>
+
+                                    <p class="pt-4">
+                                        Archivo "EnvioApi.java"
+                                    </p>
+
+                                    <div class="p-4 panelCode">
+                                        <code>
+                                                <span class="orange">import <span class="variables">android.content.Context</span>;</span>
+                                            <br>
+                                            <br>
+                                                <span class="orange">import <span class="variables">com.android.volley.Request</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">com.android.volley.RequestQueue</span>;</span>
+                                            <br>
+                                                <span class="orange">import <span class="variables">com.android.volley.toolbox.Volley</span>;</span>
+                                        </code>
+                                    </div>
+
+                                <hr>
+
+                                <h5 id="mainActivity" class="mt-3">2.2 MainActivity.java</h5>
+                                    <p>
+                                       Para enviar la operación desde nuestro MainActivity debemos implementar la interfaz "OnClickListener" y llamar al evento "OnClick":
+                                    </p>
+                                    <ul>
+                                       <li>
+                                           <div class="p-3 panelCode">
+                                               <code>
+                                                        <span class="orange">public class  </span><span class="variables">MainActivity</span> <span class="orange">extends</span> <span class="variables">AppCompatActivity</span> <span class="orange">implements</span> <span class="variables">View.OnClickListener {</span>
+                                                    <br>
+                                                    <br>
+                                                        <span class="pl-3 service">@Override</span>
+                                                    <br>
+                                                        <span class="pl-3 orange">public void</span> <span class="functions">onClick</span><span class="variables">(View v) { ... }</span>
+                                                    <br>
+                                                        <span class="variables">}</span>
+                                                </code>
+                                            </div>
+                                       </li>
+                                    </ul>
+
+                                    <p>
+                                       Usamos el método de Java <a target="_blank" href="https://es.wikibooks.org/wiki/Programaci%C3%B3n_en_Java/La_palabra_reservada_final">'final'</a> para indicar el tipo de las variables que vamos a crear:
+                                    </p>
+                                    <ul>
+                                        <li>
+                                           <div class="p-3 panelCode">
+                                               <code>
+                                                        <span class="comments">// Indicamos que las variables solo pueden ser de tipo EditText</span>
+                                                    <br>
+                                                        <span class="comments">// EditText: EditText Numero, Mes, Any, CVV y Nombre</span>
+                                                    <br>
+                                                        <span class="orange">final</span> <span class="variables">EditText Numero</span><span class="orange">,</span> <span class="variables">Mes</span><span class="orange">,</span> <span class="variables">Any</span><span class="orange">,</span> <span class="variables">CVV</span><span class="orange">,</span> <span class="variables">Nombre</span><span class="orange">;</span>
+                                                    <br>
+                                                    <br>
+                                                        <span class="comments">// Indicamos la URL de nuestro servidor donde se encuentra el archivo configurado con nuestra información del comercio</span>
+                                                    <br>
+                                                        <span class="orange">final</span> <span class="variables">String server_url =</span> <span class="green">"https://midominio.es"</span><span class="orange">;</span>
+                                                    <br>
+                                                    <br>
+                                                        <span class="comments">// Creamos la variable "builder" de tipo "AlertDialog.Builder" para poder mostrar un diálogo en la respuesta</span>
+                                                    <br>
+                                                        <span class="orange">final</span> <span class="variables">AlertDialog.Builder builder</span><span class="orange">;</span>
+                                                </code>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                    <p>
+                                       Asociamos a las variables creadas el valor de los campos de nuestro formulario:
+                                    </p>
+                                    <ul>
+                                        <li>
+                                            <div class="p-3 panelCode">
+                                                <code>
+                                                        <span class="comments">// Los identificadores están indicados en el formulario del archivo XML 'fragment_api'</span>
+                                                    <br>
+                                                        <span class="variables">Numero = findViewById(R.id.</span><span class="purple">numbertext</span><span class="variables">)</span><span class="orange">;</span>
+                                                    <br>
+                                                        <span class="variables">Mes = findViewById(R.id.</span><span class="purple">mestext</span><span class="variables">)</span><span class="orange">;</span>
+                                                    <br>
+                                                        <span class="variables">Any = findViewById(R.id.</span><span class="purple">anytext</span><span class="variables">)</span><span class="orange">;</span>
+                                                    <br>
+                                                        <span class="variables">CVV = findViewById(R.id.</span><span class="purple">cvvtext</span><span class="variables">)</span><span class="orange">;</span>
+                                                    <br>
+                                                        <span class="variables">Nombre = findViewById(R.id.</span><span class="purple">nombretext</span><span class="variables">)</span><span class="orange">;</span>
+                                                    <br>
+                                                    <br>
+                                                        <span class="comments">// Creamos un diálogo y lo asociamos a la variable 'builder' la cual será llamada en la respuesta</span>
+                                                    <br>
+                                                        <span class="variables">builder = </span><span class="orange">new</span> <span class="variables">AlertDialog.Builder(MainActivity.</span><span class="orange">this</span><span class="variables">)</span><span class="orange">;</span> 
+                                                </code>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                    <p>
+                                       Iniciamos los <a target="_blank" href="../validadores/validadores.html">validadores</a> antes de enviar la petición:
+                                       <small class="form-text text-muted alert alert-primary">
+                                           --&gt; Aconsejamos validar los datos de su formulario antes de enviarlo al procesador de pagos, para evitar que los clientes envíen información errónea a la hora de introducir sus datos.
+                                       </small>
+                                    </p>
+                                    <ul>
+                                        <li>
+                                            <div class="p-3 panelCode">
+                                                <code>
+                                                        <span class="comments">// Validación del número de la tarjeta</span>
+                                                    <br>
+                                                        <span class="orange">if</span> <span class="variables">(!AddonPaymentsRemote.ValidateCardNumber(Numero)) {</span>
+                                                        <br>
+                                                            <span class="pl-4 orange">return;</span>
+                                                        <br>
+                                                        <span class="variables">}</span>
+                                                    <br>
+                                                    <br>
+                                                        <span class="comments">// Validación del mes</span>
+                                                    <br>
+                                                        <span class="orange">if</span> <span class="variables">(!AddonPaymentsRemote.ValidateMesFormat(Mes)) {</span>
+                                                        <br>
+                                                            <span class="pl-4 orange">return;</span>
+                                                        <br>
+                                                        <span class="variables">}</span>
+                                                    <br>
+                                                    <br>
+                                                        <span class="comments">// Validación del año</span>
+                                                    <br>
+                                                        <span class="orange">if</span> <span class="variables">(!AddonPaymentsRemote.ValidateYearFormat(Any)) {</span>
+                                                        <br>
+                                                            <span class="pl-4 orange">return;</span>
+                                                        <br>
+                                                        <span class="variables">}</span>
+                                                    <br>
+                                                    <br>
+                                                        <span class="comments">// Validación del CVV (Código de seguridad de la tarjeta)</span>
+                                                    <br>
+                                                        <span class="orange">if</span> <span class="variables">(!AddonPaymentsRemote.validateCvn(CVV)) {</span>
+                                                        <br>
+                                                            <span class="pl-4 orange">return;</span>
+                                                        <br>
+                                                        <span class="variables">}</span>
+                                                    <br>
+                                                    <br>
+                                                        <span class="comments">// Validación del nombre del titular</span>
+                                                    <br>
+                                                        <span class="orange">if</span> <span class="variables">(!AddonPaymentsRemote.ValidateCardHolderName(Nombre)) {</span>
+                                                        <br>
+                                                            <span class="pl-4 orange">return;</span>
+                                                        <br>
+                                                        <span class="variables">}</span>
+                                                </code>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                    <p>
+                                       Cada vez que se ejecute el evento OnClick, mostraremos un mensaje en la parte inferior que nos indica que estamos enviando la petición a nuestro servidor:
+                                    </p>
+                                    <ul>
+                                        <li>
+                                           <div class="pl-3 panelCode">
+                                               <code>
+                                                    <span class="variables">Toast.makeText(MainActivity.</span><span class="orange">this,</span> <span class="green">"Enviando petición"</span><span class="orange">,</span> <span class="variables">Toast.</span><span class="purple">LENGTH_SHORT</span><span class="variables">).show()</span><span class="orange">;</span>
+                                                </code>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                    <p>
+                                       Formamos la petición de envío mediante el método POST a nuestro servidor y obtenemos la respuesta:
+                                    </p>
+                                    <ul>
+                                        <li>
+                                            <div class="p-3 panelCode">
+                                                <code>
+                                                    <span class="comments">// Iniciamos la petición indicando el método de envío (POST), la URL de nuestro servidor y para la respuesta iniciamos el evento de escucha <a target="_blank" href="https://developer.android.com/training/volley/simple">'Listener' (Response.Listener)</a></span>
+                                                <br>
+                                                    <span class="variables">StringRequest stringRequest = </span><span class="orange">new</span> <span class="variables">StringRequest(Request.Method.</span><span class="purple">POST</span><span class="orange">,</span> <span class="variables">server_url</span><span class="orange">, new </span><span class="variables">Response.Listener<span class="variables"><</span><span class="variables">String>() {</span>
+                                                <br>
+                                                <br>
+                                                    <span class="pl-3 service">@Override</span>
+                                                <br>
+                                                    <span class="pl-3 orange">public void </span><span class="functions">onResponse</span><span class="variables">(String response) {</span>
+                                                <br>
+                                                    <span class="pl-5 comments">// Formamos la respuesta en un diálogo con toda la información que recibimos de nuestro servidor</span>
+                                                <br>
+                                                    <span class="pl-5 purple">builder</span><span class="variables">.setTitle(</span><span class="green">"Respuesta del servidor"</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 purple">builder</span><span class="variables">.setMessage(</span><span class="green">"Petición enviada:</span><span class="orange">\n\n</span><span class="green">"</span> <span class="variables">+ response)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 purple">builder</span><span class="variables">.setPositiveButton(</span><span class="green">"Cerrar ventana"</span><span class="orange">, new </span><span class="variables">DialogInterface.OnClickListener() {</span>
+                                                <br>
+                                                <br>
+                                                    <span class="pl-5 comments">// Vaciamos los campos del formulario una vez pulsemos en el botón "Cerrar ventana"</span>
+                                                <br>
+                                                    <span class="pl-5 service">@Override</span>
+                                                <br>
+                                                    <span class="pl-5 orange">public void </span><span class="functions">onClick</span><span class="variables">(DialogInterface dialog</span><span class="orange">, int </span><span class="variables">which) {</span>
+                                                <br>
+                                                    <span class="pl-7 purple">Numero</span><span class="variables">.setText(</span><span class="green">""</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-7 purple">Mes</span><span class="variables">.setText(</span><span class="green">""</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-7 purple">Any</span><span class="variables">.setText(</span><span class="green">""</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-7 purple">CVV</span><span class="variables">.setText(</span><span class="green">""</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-7 purple">Nombre</span><span class="variables">.setText(</span><span class="green">""</span><span class="variables">)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-7 variables">}</span>
+                                                <br>
+                                                    <span class="pl-5 variables">})</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 comments">// Creamos el diálogo con los parámetros indicados arriba y los mostramos</span>
+                                                <br>
+                                                    <span class="pl-5 variables">AlertDialog alertDialog = </span><span class="purple">builder</span><span class="variables">.create()</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 variables">alertDialog.show()</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-3 variables">}</span>
+                                                <br>
+                                                    <span class="comments">// Iniciamos el evento de escucha para los errores (Response.ErrorListener)</span>
+                                                <br>
+                                                    <span class="variables">}</span><span class="orange">, new </span><span class="variables">Response.ErrorListener() {</span>
+                                                <br>
+                                                <br>
+                                                    <span class="pl-3 service">@Override</span>
+                                                <br>
+                                                    <span class="pl-3 orange">public void </span><span class="functions">onErrorResponse</span><span class="variables">(VolleyError error) {</span>
+                                                <br>
+                                                    <span class="pl-5 comments">// Mostramos el mensaje de error de conexión con su servidor</span>
+                                                <br>
+                                                    <span class="pl-5 variables">Toast.makeText(MainActivity.</span><span class="orange">this, </span><span class="green">"Error en la conexión con su servidor"</span><span class="orange">, </span><span class="variables">Toast.</span><span class="purple">LENGTH_SHORT</span><span class="variables">).show()</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 variables">error.printStackTrace()</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-3 variables">}</span>
+                                                <br>
+                                                    <span class="variables">}) {</span>
+                                                <br>
+                                                    <span class="pl-3 service">@Override</span>
+                                                <br>
+                                                    <span class="pl-3 orange">protected </span><span class="variables">Map<span class="variables"><</span>String</span><span class="orange">, </span><span class="variables">String> </span><span class="functions">getParams</span><span class="variables">() </span><span class="orange">throws </span><span class="variables">AuthFailureError {</span>
+                                                <br>
+                                                    <span class="pl-5 comments">// Asociamos el valor de cada campo del formulario a los nombres que queremos enviar a nuestro servidor</span>
+                                                <br>
+                                                    <span class="pl-5 variables">Map<span class="variables"><</span>String</span><span class="orange">, </span> <span class="variables">String> params = </span><span class="orange">new </span><span class="variables">HashMap<span class="variables"><</span>String, String>()</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 variables">params.put(</span><span class="green">"numero"</span><span class="orange">, </span><span class="purple">Numero</span><span class="variables">.getText().toString())</span<span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 variables">params.put(</span><span class="green">"mes"</span><span class="orange">, </span><span class="purple">Mes</span><span class="variables">.getText().toString())</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 variables">params.put(</span><span class="green">"any"</span><span class="orange">, </span><span class="purple">Any</span><span class="variables">.getText().toString())</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 variables">params.put(</span><span class="green">"cvv"</span><span class="orange">, </span><span class="purple">CVV</span><span class="variables">.getText().toString())</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 variables">params.put(</span><span class="green">"nombre"</span><span class="orange">, </span><span class="purple">Nombre</span><span class="variables">.getText().toString())</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 orange">return </span><span class="variables">params</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-3 variables">}</span>
+                                                <br>
+                                                    <span class="pl-2 variables">}</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-2 comments">// Lanzamos la operación a nuestro servidor añadiendo los parámetros a <a target="_blank" href="https://developer.android.com/training/volley/requestqueue?hl=es-419">'.addTorequestqueue()'</a></span>
+                                                <br>
+                                                    <span class="pl-2 variables">EnvioApi.getInstance(MainActivity.</span><span class="orange">this</span><span class="variables">).addTorequestqueue(stringRequest)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="variables">}</span>
+                                                </code>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                <hr>
+
+                                <h5 id="enviarApi" class="mt-3">
+                                    2.3 EnviarApi.java
+                                </h5>
+
+                                 <p>
+                                   Instanciamos los parámetros del formulario antes de ser enviados a nuestro servidor:
+                                </p>
+                                <ul>
+                                   <li>
+                                       <div class="p-3 panelCode">
+                                           <code>
+                                                    <span class="comments">// Indicamos que la clase 'EnvioApi' es pública</span>
+                                                <br>
+                                                    <span class="orange">public class </span><span class="variables">EnvioApi {</span>
+                                                <br>
+                                                <br>
+                                                    <span class="pl-3 comments">// Creamos la variable estática 'mInstance' y la asociamos a la clase 'EnvioApi'</span>
+                                                <br>
+                                                    <span class="pl-3 orange">private static </span><span class="variables">EnvioApi</span> <span class="purple">mInstance</span><span class="orange">;</span>
+                                                <br>
+                                                <br>
+                                                    <span class="pl-3 comments">// Asociamos la variable 'requestQueue' a la clase 'RequestQueue'</span>
+                                                <br>
+                                                    <span class="pl-3 orange">private </span><span class="variables">RequestQueue</span> <span class="purple">requestQueue</span><span class="orange">;</span>
+                                                <br>
+                                                <br>
+                                                    <span class="pl-3 comments">// Creamos la variable estática 'mCtx' y la asociamos a la clase abstracta <a target="_blank" href="http://developer.android.com/intl/es/reference/android/content/Context.html">'Context'</a></span>
+                                                <br>
+                                                    <span class="pl-3 orange">private static </span><span class="variables">Context</span> <span class="purple">mCtx</span><span class="orange">;</span>
+                                                <br>
+                                                <br>
+                                                    <span class="pl-3 orange">private </span><span class="functions">EnvioApi</span><span class="variables">(Context context) {</span>
+                                                <br>
+                                                    <span class="pl-5 comments">// Asociamos el valor de 'context' a la variable 'mCtx'</span>
+                                                <br>
+                                                    <span class="pl-5 purple">mCtx </span><span class="variables">= context</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 comments">// Obtenemos la instancia de la cola de peticiones que se usará a través de toda la aplicación</span>
+                                                <br>
+                                                    <span class="pl-5 purple">requestQueue </span><span class="variables">= getRequestQueue()</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-3 variables">}</span>
+                                                <br>
+                                                <br>
+                                                    <span class="pl-3 orange">public static synchronized </span><span class="variables">EnvioApi </span><span class="functions">getInstance</span><span class="variables">(Context context) {</span>
+                                                <br>
+                                                    <span class="pl-5 comments">// Realizamos un bucle con el método 'synchronized' para evitar que dos o más subprocesos intenten acceder al mismo recurso simultáneamente</span>
+                                                <br>
+                                                    <span class="pl-5 orange">if</span><span class="variables">(</span><span class="purple">mInstance</span><span class="variables">== </span><span class="orange">null</span><span class="variables">) {</span>
+                                                <br>
+                                                    <span class="pl-6 purple">mInstance </span><span class="variables">= </span><span class="orange">new </span><span class="variables">EnvioApi(context)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 variables">}</span>
+                                                <br>
+                                                    <span class="pl-5 orange">return </span><span class="purple">mInstance</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-3 variables">}</span>
+                                                <br>
+                                                <br>
+                                                    <span class="pl-3 orange">public </span><span class="variables">RequestQueue </span><span class="functions">getInstance</span><span class="variables">() {</span>
+                                                <br>
+                                                    <span class="pl-5 comments">// Creamos una nueva instancia</span>
+                                                <br>
+                                                    <span class="pl-5 orange">if</span><span class="variables">(</span><span class="purple">requestQueue</span><span class="variables">==</span><span class="orange">null</span><span class="variables">) {</span>
+                                                <br>
+                                                    <span class="pl-6 purple">requestQueue </span><span class="variables">= Volley.newRequestQueue(</span><span class="purple">mCtx</span><span class="variables">.getApplicationContext())</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-5 variables">}</span>
+                                                <br>
+                                                    <span class="pl-5 orange">return </span><span class="purple">requestQueue</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-3 variables">}</span>
+                                                <br>
+                                                <br>
+                                                    <span class="pl-3 comments">// Para agregar un nueva petición accedemos al método 'addToRequestQueue()'</span>
+                                                <br>
+                                                    <span class="pl-3 orange">public </span><span class="variables"><</span><span class="variables">T></span><span class="orange">void </span><span class="functions">addTorequestqueue</span><span class="variables">(Request<span class="variables"><</span><span class="variables">T></span> request) {</span>
+                                                <br>
+                                                    <span class="pl-5 purple">requestQueue</span><span class="variables">.add(request)</span><span class="orange">;</span>
+                                                <br>
+                                                    <span class="pl-3 variables">}</span>
+                                                <br>
+                                                    <span class="variables">}</span>
+                                            </code>
+                                        </div>
+                                   </li>
+                                </ul>
+
+                                <hr>
+
+                                <h5 id="buildgradle" class="mt-3">
+                                    2.4 build.gradle
+                                </h5>
+
+                                <p>
+                                    Las librerías que implementamos en la <a href="https://github.com/AddonPayments/android-sdk/tree/master/app">aplicación de ejemplo</a> son las siguientes:
+                                </p>
+                                <ul>
+                                    <li>
+                                        <div class="p-3 panelCode">
+                                            <code>
+                                                    <span class="variables">dependencies {</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation fileTree(</span><span class="green">dir</span><span class="variables">: </span><span class="green">'libs'</span><span class="variables">, </span><span class="green">include</span><span class="variables">: [</span><span class="green">'*.jar'</span><span class="variables">])</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'androidx.appcompat:appcompat:1.1.0'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'com.google.android.material:material:1.0.0'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'androidx.constraintlayout:constraintlayout:1.1.3'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'androidx.navigation:navigation-fragment:2.1.0'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'androidx.navigation:navigation-ui:2.1.0'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'androidx.lifecycle:lifecycle-extensions:2.1.0'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'com.android.volley:volley:1.1.1'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'junit:junit:4.12'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'androidx.lifecycle:lifecycle-extensions:2.1.0'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'com.google.code.gson:gson:2.8.5'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">testImplementation </span><span class="green">'junit:junit:4.12'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">androidTestImplementation </span><span class="green">'androidx.test.ext:junit:1.1.1'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">androidTestImplementation </span><span class="green">'androidx.test.espresso:espresso-core:3.2.0'</span>
+                                                <br>
+                                                    <span class="pl-4 variables">implementation </span><span class="green">'androidx.gridlayout:gridlayout:1.0.0'</span>
+                                                <br>
+                                                    <span class="variables">}</span>
+                                            </code>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <p>
+                                   <small class="form-text text-muted alert alert-primary">
+                                       --&gt; La versión de compilación del SDK es la 29 y el SDK mínimo compatible es el 15.
+                                   </small>
+                                </p>
+                            </div>            
+                        </div>
+                        <!-- /Punto 2 -->
+                    </div>
+                    <!-- /Contenido común -->
+
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="../../assets/js/barraprogreso.js"></script>
+    </body>
+</html>

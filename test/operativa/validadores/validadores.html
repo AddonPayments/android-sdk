@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Víctor Cantera">
+        <link rel="icon" href="../../assets/img/comercia_ico.png" type="image/x-icon"/ >
+        <title>Validadores - SDK Android</title>
+
+        <!-- Bootstrap 4.3.1 -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="../../assets/css/style.css">
+    </head>
+
+    <body>
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-lg navbar-light navbar-rpdc mb-3">
+            <a class="navbar-brand">
+                <img src="../../assets/img/log2.svg" width="30" height="30" class="img-fluid" alt="Logo Addon Payments">
+                <span class="addonNav">ADDON</span> <span>PAYMENTS</span>
+                <span class="d-none d-sm-none d-lg-inline d-xl-inline sdkNav">
+                    <span>
+                        /SDK
+                        <span class="barraNav">_</span>
+                        de
+                        <span class="barraNav">_</span>
+                        Android
+                    </span>
+                </span>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+          </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto pl-2 pr-2">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Inicio
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item pl-2" href="../../index.html">Índice</a>
+                            <a class="dropdown-item pl-2" href="../errores.html">Errores de Addon Payments</a>
+                            <a class="dropdown-item pl-2" href="../informe.html">Convertir informe</a>
+                        </div>
+                    </li>
+                    <li class="nav-item ml-1 dropdown">
+                        <a class="nav-link pl-2 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Pagos con tarjeta
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-header text-center p-0">API</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2" href="../API/index.html">Operación API</a>
+                            <hr class="m-0 p-0">
+                            <div class="dropdown-header text-center p-0">HPP</div>
+                            <hr class="m-0 p-0">
+                                <a class="dropdown-item pl-2" href="../HPP/index.html">Operación HPP</a>
+                        </div>
+                    </li>
+                    <li class="nav-item ml-1 dropdown">
+                        <a class="nav-link pl-2 dropdown-toggle active" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Validadores
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item pl-2 active" href="#">Validadores</a>
+                            <a class="dropdown-item pl-2" href="validadores.html#cardholder">Nombre del titular</a>
+                            <a class="dropdown-item pl-2" href="validadores.html#numberCard">Número de tarjeta</a>
+                            <a class="dropdown-item pl-2" href="validadores.html#cvn">CVN</a>
+                            <a class="dropdown-item pl-2" href="validadores.html#mes">Mes</a>
+                            <a class="dropdown-item pl-2" href="validadores.html#año">Año</a>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /NAVBAR -->
+        
+        <div class="col-lg-12"> 
+            <div id="contenidoComun" class="container-fluid">
+                <div class="row">
+
+                    <!-- Menú lateral -->
+                    <div class="col-lg-2 sticky-top d-none d-sm-none d-lg-block d-xl-block MenuLateral">
+
+                        <!-- Barra de progreso -->
+                        <div class="progress-bar" id="progreso"></div>
+                        <!-- /Barra de progreso -->
+
+                        <nav class="navbar sticky-top navbar-light" style="padding: 0px;">
+                            <nav class="nav nav-pills flex-column">
+                                <a class="nav-link" href="#valid">1. Validadores</a>
+                                <nav>
+                                  <a class="nav-link ml-3 my-1" href="#codigoEjemplo">1.1 Código de ejemplo</a>
+                                </nav>
+                                <a class="nav-link" href="#descripciones">2. Descripciones</a>
+                                <nav class="nav nav-pills flex-column">
+                                  <a class="nav-link ml-3 my-1" href="#amexcvn">2.1 AMEX CVN</a>
+                                  <a class="nav-link ml-3 my-1" href="#cardholder">2.2 Nombre del titular</a>
+                                  <a class="nav-link ml-3 my-1" href="#numberCard">2.3 Número de tarjeta</a>
+                                  <a class="nav-link ml-3 my-1" href="#cvn">2.4 CVN</a>
+                                  <a class="nav-link ml-3 my-1" href="#mes">2.5 Mes</a>
+                                  <a class="nav-link ml-3 my-1" href="#año">2.6 Año</a>
+                                  <a class="nav-link ml-3 my-1" href="#expdate">2.7 Expiry Date</a>
+                                  <a class="nav-link ml-3 my-1" href="#expact">2.8 Expiry Date actual o superior</a>
+                                </nav>
+                            </nav>
+                        </nav>
+                    </div>
+                    <!-- /Menú lateral -->
+
+                    <!-- Contenido común -->
+                    <div class="col-lg-10" >
+                        <!-- Punto 1-->
+                        <div class="contenedor">
+                            <div class="pl-3 pt-3 pr-3 pb-4 mb-3 text-justify">
+                                <h3 id="valid" class="titulo">
+                                    1. Validadores
+                                </h3>
+                                <hr>
+
+                                <p>
+                                    Para realizar las validaciones de los campos de su formulario, puede utilziar las funciones que facilitamos en la carpeta <a target="_blank" href="https://github.com/AddonPayments/android-sdk/tree/master/validadores">validadores</a>.
+                                </p>
+                                <h5 class="pt-3" id="codigoEjemplo">1.1 Código de ejemplo (archivo AddonPaymentsRemote.java)</h5>
+
+                                <hr>
+
+                                <div class="p-4 panelCode">
+                                    <code>
+                                            <span class="orange">import <span class="variables">android.widget.EditText</span>;</span>
+                                        <br>
+                                        <br>
+                                            <span class="orange">public class  </span><span class="variables">AddonPaymentsRemote </span><span class="variables">{</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 comments">// Validación de tarjetas AMEX</span>
+                                        <br>
+                                            <span class="pl-3 orange">public static boolean</span> <span class="functions">validateAmexCvn</span><span class="variables">(String cvn) {</span>
+                                        <br>
+                                            <span class="pl-5 orange">return </span><span class="variables">ValidateAmexCvn.perform(cvn)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 comments">// Validación del nombre del titular de la tarjeta</span>
+                                        <br>
+                                            <span class="pl-3 orange">public static boolean</span> <span class="functions">ValidateCardHolderName</span><span class="variables">(EditText Nombre) {</span>
+                                        <br>
+                                            <span class="pl-5 orange">return </span><span class="variables">ValidateCardHolderName.perform(Nombre)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 comments">// Validación del número de la tarjeta</span>
+                                        <br>
+                                            <span class="pl-3 orange">public static boolean</span> <span class="functions">ValidateCardNumber</span><span class="variables">(EditText Numero) {</span>
+                                        <br>
+                                            <span class="pl-5 orange">return </span><span class="variables">ValidateCardNumber.perform(Numero)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 comments">// Validación del código de seguridad</span>
+                                        <br>
+                                            <span class="pl-3 orange">public static boolean</span> <span class="functions">validateCvn</span><span class="variables">(EditText CVV) {</span>
+                                        <br>
+                                            <span class="pl-5 orange">return </span><span class="variables">ValidateCvn.perform(CVV)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 comments">// Validación del mes en la fecha de expiración</span>
+                                        <br>
+                                            <span class="pl-3 orange">public static boolean</span> <span class="functions">ValidateMesFormat</span><span class="variables">(EditText Mes) {</span>
+                                        <br>
+                                            <span class="pl-5 orange">return </span><span class="variables">ValidateMesFormat.perform(Mes)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 comments">// Validación del año en la fecha de expiración</span>
+                                        <br>
+                                            <span class="pl-3 orange">public static boolean</span> <span class="functions">ValidateYearFormat</span><span class="variables">(EditText Any) {</span>
+                                        <br>
+                                            <span class="pl-5 orange">return </span><span class="variables">ValidateYearFormat.perform(Any)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 comments">// Validación de la fecha de expiración</span>
+                                        <br>
+                                            <span class="pl-3 orange">public static boolean</span> <span class="functions">ValidateExpiryDataFormat</span><span class="variables">(String Exp) {</span>
+                                        <br>
+                                            <span class="pl-5 orange">return </span><span class="variables">ValidateExpiryDataFormat.perform(Exp)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 comments">// Validación para que la fecha de expiración no sea meno a la actual</span>
+                                        <br>
+                                           <span class="pl-3 orange">public static boolean</span> <span class="functions">validateExpiryDateNotInPast</span><span class="variables">(String date) {</span>
+                                        <br>
+                                            <span class="pl-5 orange">return </span><span class="variables">ValidateExpiryDateNotInPast.perform(date)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                            <span class="variables">}</span>
+                                    </code>
+                                </div>
+                            </div>            
+                        </div>
+                        <!-- /Punto 1-->
+
+                        <!-- Punto 2-->
+                        <div class="contenedor">
+                            <div class="pl-3 pt-3 pr-3 mb-3 pb-2 text-justify">
+                                <h3 class="pt-1" id="descripciones">
+                                    2. Descripciones
+                                </h3>
+                                <hr>
+                                
+                                <h5 id="amexcvn">2.1 AMEX CVN</h5>
+                                    <p>
+                                       La validación de CVN para Amex se encuentra en el archivo 'ValidateAmexCvn.java'
+                                    </p>
+
+                                    <div class="p-4 panelCode">
+                                        <code>
+                                                <span class="comments">// Validar Amex CVN. Se aplica a los tipos de tarjetas Amex. Sólo permite 4 caracteres numéricos</span>
+                                            <br>
+                                                <span class="orange">public class </span><span class="variables">ValidateAmexCvn {</span>
+                                            <br>
+                                                <span class="pl-3 orange">public static boolean </span><span class="functions">perform</span><span class="variables">(String cvn) {</span>
+                                            <br>
+                                                <span class="pl-5 comments">// Como máximo 4 caracteres</span>
+                                            <br>
+                                                <span class="pl-5 orange">if </span><span class="variables">(cvn == </span><span class="orange">null </span><span class="variables">|| !cvn.matches(</span><span class="green">"</span><span class="functions">^\\d{</span>4<span class="functions">}$</span><span class="green">"</span><span class="variables">)) {</span>
+                                            <br>
+                                                <span class="pl-7 orange">return false;</span>
+                                            <br>
+                                                <span class="pl-5 variables">}</span>
+                                            <br>
+                                                <span class="pl-5 orange">return true;</span>
+                                            <br>
+                                                <span class="pl-3 variables">}</span>
+                                            <br>
+                                                <span class="variables">}</span>
+                                        </code>
+                                    </div>
+
+                                    <hr>
+
+                                <h5 id="cardholder">2.2 Nombre del titular</h5>
+                                <p>
+                                   La validación del nombre del titular se encuentra en el archivo 'ValidateCardHolderName.java'
+                                </p>
+
+                                <div class="p-4 panelCode">
+                                    <code>
+                                            <span class="comments">// Valide el nombre del titular de la tarjeta. Devuelve verdadero si el titular de la tarjeta es válido. Sólo permite valores ISO/IEC 8859-1 no vacíos de 100 caracteres o menos.</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">android.widget.EditText</span>;</span>
+                                        <br>
+                                        <br>
+                                            <span class="orange">public class </span><span class="variables">ValidateCardHolderName {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 orange">public static boolean </span><span class="functions">perform</span><span class="variables">(EditText Nombre) {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// En caso de que el nombre del titular esté vacío, mostrar el mensaje de error "Debe introducir el nombre del titular de la tarjeta"</span>
+                                        <br>
+                                            <span class="pl-5 orange">if </span> <span class="variables">(Nombre == </span><span class="orange">null</span><span class="variables">) {</span>
+                                        <br>
+                                            <span class="pl-7 variables">Nombre.setError(</span><span class="green">"Debe introducir el nombre del titular de la tarjeta"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 variables">Nombre.requestFocus()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 orange">return false;</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Mostrar error cuando se intente enviar un espacio en blanco</span>
+                                        <br>
+                                            <span class="pl-5 orange">if </span> <span class="variables">(Nombre.getText().toString().trim().length() == </span>0<span class="variables">) {</span>
+                                        <br>
+                                            <span class="pl-7 variables">Nombre.setError(</span><span class="green">"Error espacio en blanco"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 variables">Nombre.requestFocus()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 orange">return false;</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Máximo 100 caracteres</span>
+                                        <br>
+                                            <span class="pl-5 orange">if </span> <span class="variables">(!Nombre.getText().toString().matches(</span><span class="green">"</span><span class="functions">^[\u0020-\u007E\u00A0-\u00FF]{</span>1<span class="functions">,</span>100<span class="functions">}$</span><span class="green">"</span><span class="variables">)) {</span>
+                                        <br>
+                                            <span class="pl-7 variables">Nombre.setError(</span><span class="green">"Hasta 100 caracteres"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 variables">Nombre.requestFocus()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 orange">return false;</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                            <span class="pl-5 orange">return true;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                            <span class="variables">}</span>                                               
+                                    </code>
+                                </div>
+
+                                <hr>
+
+                                <h5 id="numberCard">2.3 Número de tarjeta</h5>
+                                <p>
+                                   La validación del número de la tarjeta se encuentra en el archivo 'ValidateCardNumber.java'
+                                </p>
+
+                                <div class="p-4 panelCode">
+                                    <code>
+                                            <span class="comments">// Valide el número de la tarjeta. Devuelve true si el número de tarjeta es válido. Sólo permite valores numéricos no vacíos entre 12 y 19 caracteres. También se realiza un chequeo de Luhn contra el número de tarjeta.</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">android.widget.EditText</span>;</span>
+                                        <br>
+                                        <br>
+                                            <span class="orange">public class </span><span class="variables">ValidateCardNumber {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 orange">public static boolean </span><span class="functions">perform</span><span class="variables">(EditText Numero) {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Prueba numérica y longitud entre 12 y 19</span>
+                                        <br>
+                                            <span class="pl-5 orange">if </span> <span class="variables">(Numero.getText().toString() == </span><span class="orange">null </span><span class="variables">|| !Numero.getText().toString().matches(</span><span class="green">"</span><span class="functions">^\\d{</span>12<span class="orange">,</span>19<span class="functions">}$</span><span class="green">"</span><span class="variables">)) {</span>
+                                        <br>
+                                            <span class="pl-7 variables">Numero.setError(</span><span class="green">"Debe introducir como mínimo 12 números y como máximo 19"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 variables">Numero.requestFocus()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 orange">return false;</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Comprobación de Luhn</span>
+                                        <br>
+                                            <span class="pl-5 orange">int </span><span class="variables">sum = </span>0<span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 orange">int </span><span class="variables">digit = </span>0<span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 orange">int </span><span class="variables">addend = </span>0<span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 orange">boolean </span><span class="variables">timesTwo = </span><span class="orange">false;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 orange">for </span><span class="variables">(</span><span class="orange">int </span><span class="variables">i = Numero.length() - </span>1<span class="orange">; </span><span class="variables">i >= </span>0<span class="orange">; </span><span class="variables">i--) {</span>
+                                        <br>
+                                            <span class="pl-7 variables">digit = Integer.parseInt(Numero.getText().toString().substring(i</span><span class="orange">, </span><span class="variables">i + </span>1<span class="variables">)</span><span class="orange">, </span>10<span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 orange">if </span><span class="variables">(timesTwo) {</span>
+                                        <br>
+                                            <span class="pl-9 variables">addend = digit * </span>2<span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-9 orange">if </span><span class="variables">(addend > </span>9<span class="variables">) {</span>
+                                        <br>
+                                            <span class="pl-11 variables">addend -= </span>9<span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-9 variables">}</span>
+                                        <br>
+                                            <span class="pl-7 variables">} </span><span class="orange">else </span><span class="variables">{</span>
+                                        <br>
+                                            <span class="pl-9 variables">addend = digit</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 variables">}</span>
+                                        <br>
+                                            <span class="pl-7 variables">sum += addend</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 variables">timesTwo = !timesTwo</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 orange">int </span><span class="variables">modulus = sum % </span>10<span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 orange">if </span><span class="variables">(modulus != </span>0<span class="variables">) {</span>
+                                        <br>
+                                            <span class="pl-7 orange">return false;</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                            <span class="pl-5 orange">return true;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                            <span class="variables">}</span>                                               
+                                    </code>
+                                </div>
+
+                                <hr>
+
+                                <h5 id="cvn">2.4 CVN</h5>
+                                <p>
+                                   La validación del CVV se encuentra en el archivo 'ValidateCvn.java'
+                                </p>
+
+                                <div class="p-4 panelCode">
+                                    <code>
+                                            <span class="comments">// Validar CVN. Se aplica a los tipos de tarjetas que no son de Amex. Sólo permite 3 caracteres numéricos</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">android.widget.EditText</span>;</span>
+                                        <br>
+                                        <br>
+                                            <span class="orange">public class </span><span class="variables">ValidateCvn {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 orange">public static boolean </span><span class="functions">perform</span><span class="variables">(EditText CVV) {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Prueba de longitud numérica de 3 como máximo</span>
+                                        <br>
+                                            <span class="pl-5 orange">if </span> <span class="variables">(CVV.getText().toString() == </span><span class="orange">null</span><span class="variables">|| !CVV.getText().toString().matches(</span><span class="green">"</span><span class="functions">^\\d{</span>3<span class="functions">}$</span><span class="green">"</span><span class="variables">)) {</span>
+                                        <br>
+                                            <span class="pl-7 variables">CVV.setError(</span><span class="green">"Debe introducir como máximo 3 números"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 variables">CVV.requestFocus()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 orange">return false;</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                            <span class="pl-5 orange">return true;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                            <span class="variables">}</span>                                               
+                                    </code>
+                                </div>
+
+                                <hr>
+
+                                <h5 id="mes">2.5 Mes</h5>
+                                <p>
+                                   La validación del mes se encuentra en el archivo 'ValidateMesFormat.java'
+                                </p>
+
+                                <div class="p-4 panelCode">
+                                    <code>
+                                            <span class="comments">// Validar formato de fecha de caducidad. Sólo permite 2 caracteres numéricos. El mes debe estar entre 1 y 12</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">android.widget.EditText</span>;</span>
+                                        <br>
+                                        <br>
+                                            <span class="orange">public class </span><span class="variables">ValidateMesFormat {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 orange">public static boolean </span><span class="functions">perform</span><span class="variables">(EditText Mes) {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Prueba de longitud numérica de 2 como máximo</span>
+                                        <br>
+                                            <span class="pl-5 orange">if </span> <span class="variables">(Mes.getText().toString() == </span><span class="orange">null</span><span class="variables">|| !Mes.getText().toString().matches(</span><span class="green">"</span><span class="functions">^\\d{</span>2<span class="functions">}$</span><span class="green">"</span><span class="variables">)) {</span>
+                                        <br>
+                                            <span class="pl-7 variables">Mes.setError(</span><span class="green">"Debe introducir como máximo 2 números"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 variables">Mes.requestFocus()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 orange">return false;</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 orange">int </span><span class="variables">month = Integer.parseInt(Mes.getText().toString())</span><span class="orange">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Prueba del mes para que el rango sea 1-12</span>
+                                        <br>
+                                            <span class="pl-5 orange">if </span><span class="variables">(month < </span>1<span class="variables">|| month > </span>12<span class="variables">) {</span>
+                                        <br>
+                                            <span class="pl-7 variables">Mes.setError(</span><span class="green">"Debe indicar el mes (valores del 1 al 12)"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 variables">Mes.requestFocus()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 orange">return false;</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                            <span class="pl-5 orange">return true;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                            <span class="variables">}</span>                                               
+                                    </code>
+                                </div>
+
+                                <hr>
+
+                                <h5 id="año">2.6 Año</h5>
+                                <p>
+                                   La validación del año se encuentra en el archivo 'ValidateYearFormat.java'
+                                </p>
+
+                                <div class="p-4 panelCode">
+                                    <code>
+                                            <span class="comments">// Validar formato de fecha de caducidad. Sólo permite 4 caracteres numéricos</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">android.widget.EditText</span>;</span>
+                                        <br>
+                                            <span class="orange">import <span class="variables">java.util.Calendar</span>;</span>
+                                        <br>
+                                        <br>
+                                            <span class="orange">public class </span><span class="variables">ValidateYearFormat {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 orange">public static boolean </span><span class="functions">perform</span><span class="variables">(EditText Any) {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Prueba de longitud numérica de 2 como máximo</span>
+                                        <br>
+                                            <span class="pl-5 orange">if </span> <span class="variables">(Any.getText().toString() == </span><span class="orange">null</span><span class="variables">|| !Any.getText().toString().matches(</span><span class="green">"</span><span class="functions">^\\d{</span>4<span class="functions">}$</span><span class="green">"</span><span class="variables">)) {</span>
+                                        <br>
+                                            <span class="pl-7 variables">Any.setError(</span><span class="green">"Debe introducir el año completo"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 variables">Any.requestFocus()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 orange">return false;</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Validamos el año para qu eno sea menor al actual</span>
+                                        <br>
+                                            <span class="pl-5 orange">int </span><span class="variables">Year = Integer.parseInt(Any.getText().toString())</span><span class="orange">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 variables">Calendar calendar = Calendar.getInstance()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 orange">int </span><span class="variables">currentYear = calendar.get(Calendar.</span><span class="purple">YEAR</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 orange">if </span><span class="variables">(Year < (currentYear)) {</span>
+                                        <br>
+                                            <span class="pl-7 variables">Any.setError(</span><span class="green">"Debe introducir una fecha de expiración correcta"</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 variables">Any.requestFocus()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-7 variables">return false;</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                            <span class="pl-5 orange">return true;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                            <span class="variables">}</span>                                               
+                                    </code>
+                                </div>
+
+                                <hr>
+
+                                <h5 id="expdate">2.7 Expiry Date</h5>
+                                <p>
+                                   La validación de la fecha completa (mes + año) se encuentra en el archivo 'ValidateExpiryDataFormat.java'.
+                                   <small class="form-text text-muted alert alert-primary">
+                                       --&gt; En el ejemplo que facilitamos en GitHub no empleamos esta función, ya que separamos el campo del mes y el año para que se procesen por separado.
+                                   </small>
+                                </p>
+
+                                <div class="p-4 panelCode">
+                                    <code>
+                                            <span class="comments">// Validar formato de fecha de caducidad. Sólo permite 4 caracteres numéricos. El mes debe estar entre 1 y 12</span>
+                                        <br>
+                                            <span class="orange">public class </span><span class="variables">ValidateExpiryDataFormat {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 orange">public static boolean </span><span class="functions">perform</span><span class="variables">(String expiryDate) {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// El número no puede ser mayor a 4 caracteres</span>
+                                        <br>
+                                            <span class="pl-5 orange">if </span> <span class="variables">(expiryDate == </span><span class="orange">null</span><span class="variables">|| !expiryDate.matches(</span><span class="green">"</span><span class="functions">^\\d{</span>4<span class="functions">}$</span><span class="green">"</span><span class="variables">)) {</span>
+                                        <br>
+                                            <span class="pl-7 orange">return false;</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 orange">int </span><span class="variables">month = Integer.parseInt(expiryDate.substring(</span>0<span class="orange">, </span>2<span class="variables">)</span><span class="orange">, </span>10<span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 orange">int </span><span class="variables">year = Integer.parseInt(expiryDate.substring(</span>2<span class="orange">, </span>4<span class="variables">)</span><span class="orange">, </span>10<span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// El mes no puede superar el rango de 1-12</span>
+                                        <br>
+                                            <span class="pl-5 orange">if </span><span class="variables">(month < </span>1<span class="variables">|| month > </span>12<span class="variables">) {</span>
+                                        <br>
+                                            <span class="pl-7 variables">return false;</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                            <span class="pl-5 orange">return true;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                            <span class="variables">}</span>                                               
+                                    </code>
+                                </div>
+
+                                <hr>
+
+                                <h5 id="expact">2.8 Expiry Date actual o superior</h5>
+                                <p>
+                                   La validación de la fecha de expiración se encuentra en el archivo 'ValidateExpiryDataFormat.java'.
+                                   <small class="form-text text-muted alert alert-primary">
+                                       --&gt; En el ejemplo que facilitamos en GitHub no empleamos esta función, ya que separamos el campo del mes y el año para que se procesen por separado.
+                                   </small>
+                                </p>
+
+                                <div class="p-4 panelCode">
+                                    <code>
+                                            <span class="comments">// Validar la fecha de caducidad para que sea igual o superior a la actual. También ejecuta la comprobación de la fecha desde validateExpiryDateFormat</span>
+                                        <br>
+                                            <span class="orange">import </span><span class="variables">java.util.Calendar</span><span class="orange">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="orange">public class </span><span class="variables">ValidateExpiryDateNotInPast {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-3 orange">public static boolean </span><span class="functions">perform</span><span class="variables">(String expiryDate) {</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// Validamos la fecha</span>
+                                        <br>
+                                            <span class="pl-5 orange">if </span> <span class="variables">(!ValidateExpiryDataFormat.perform(expiryDate)) {</span>
+                                        <br>
+                                            <span class="pl-7 orange">return false;</span>
+                                        <br>
+                                            <span class="pl-5 variables">}</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 orange">int </span><span class="variables">month = Integer.parseInt(expiryDate.substring(</span>0<span class="orange">, </span>2<span class="variables">)</span><span class="orange">, </span>10<span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 orange">int </span><span class="variables">year = Integer.parseInt(expiryDate.substring(</span>2<span class="orange">, </span>4<span class="variables">)</span><span class="orange">, </span>10<span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                        <br>
+                                            <span class="pl-5 comments">// La fecha no puede ser menor a la actual</span>
+                                        <br>
+                                            <span class="pl-5 variables">Calendar calendar = Calendar.getInstance()</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 orange">int </span><span class="variables">currentYear = calendar.get(Calendar.</span><span class="purple">MONTH</span><span class="variables">) + </span>1<span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 orange">int </span><span class="variables">currentYear = calendar.get(Calendar.</span><span class="purple">YEAR</span><span class="variables">)</span><span class="orange">;</span>
+                                        <br>
+                                            <span class="pl-5 orange">if </span><span class="variables">(year < (currentYear % </span>100<span class="variables">)) {</span>12<span class="variables">) {</span>
+                                        <br>
+                                            <span class="pl-7 variables">return false;</span>
+                                        <br>
+                                            <span class="pl-5 variables">} </span><span class="orange">else if </span><span class="variables">(year == (currentYear % </span>100<span class="variables">) && month < currentMonth) {</span>
+                                        <br>
+                                            <span class="pl-7 variables">return false;</span>
+                                        <br>
+                                            <span class="pl-5 variables">} </span>
+                                        <br>
+                                            <span class="pl-5 orange">return true;</span>
+                                        <br>
+                                            <span class="pl-3 variables">}</span>
+                                        <br>
+                                            <span class="variables">}</span>                                               
+                                    </code>
+                                </div>
+                            </div>            
+                        </div>
+                        <!-- /Punto 2 -->
+                    </div>
+                    <!-- /Contenido común -->
+
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="../../assets/js/barraprogreso.js"></script>
+    </body>
+</html>
